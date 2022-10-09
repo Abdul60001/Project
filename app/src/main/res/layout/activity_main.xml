@@ -7,12 +7,72 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="234dp"
+        android:layout_height="93dp"
+        android:text="Login"
+        android:textSize="64sp"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="169dp" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="206dp"
+        tools:layout_editor_absoluteY="386dp" />
 
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="206dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="166dp"
+        android:layout_height="46dp"
+        android:text="Username: "
+        android:textSize="32sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="386dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="167dp"
+        android:layout_height="46dp"
+        android:text="Password: "
+        android:textSize="32sp"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="490dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        tools:layout_editor_absoluteX="235dp"
+        tools:layout_editor_absoluteY="653dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="197dp"
+        android:layout_height="54dp"
+        android:text="Don't have an Account? "
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="661dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="135dp"
+        android:layout_height="75dp"
+        android:text="Login"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="557dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
