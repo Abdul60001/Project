@@ -10,39 +10,65 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "AppDatabase";
     private static final int DATABASE_VERSION = 1;
 
+    //users table variables
+    private static final String USERS_TABLE_NAME = "Users";
+    private static final String USERS_ID = "id";
+    private static final String USERS_USERNAME = "username";
+    private static final String USERS_PASSWORD = "password";
+    private static final String USERS_USERTYPE = "userType";
+
+    //courses table variables
+    private static final String COURSES_TABLE_NAME = "Courses";
+    private static final String COURSES_ID = "id";
+    private static final String COURSES_CODE = "code";
+    private static final String COURSES_NAME = "name";
+    private static final String COURSES_INSTRUCTOR_ID = "instructorId";
+    private static final String COURSES_DESCRIPTION = "description";
+    private static final String COURSES_CAPACITY = "capacity";
+
+    //times table variables
+    private static final String TIMES_TABLE_NAME = "Times";
+    private static final String TIMES_ID = "id";
+    private static final String TIMES_DATETIME = "dateTime";
+
+    //courses_times table variables
+    private static final String COURSES_TIMES_TABLE_NAME = "Course_Times";
+    private static final String COURSES_TIMES_COURSE_ID = "courseId";
+    private static final String COURSES_TIMES_TIME_ID = "timeId";
+
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create_users_table = "CREATE TABLE Users (" +
-                "id INTEGER PRIMARY KEY, " +
-                "username TEXT, " +
-                "password TEXT, " +
-                "userType TEXT" +
+        String create_users_table = "CREATE TABLE " + USERS_TABLE_NAME + " (" +
+                USERS_ID + " INTEGER PRIMARY KEY, " +
+                USERS_USERNAME + " TEXT UNIQUE, " +
+                USERS_PASSWORD + " TEXT, " +
+                USERS_USERTYPE + " TEXT" +
                 ");";
 
-        String create_courses_table = "CREATE TABLE Courses (" +
-                "id INTEGER PRIMARY KEY, " +
-                "code TEXT, " +
-                "name TEXT, " +
-                "instructorId INTEGER, " +
-                "description TEXT, " +
-                "capactiy INTEGER, " +
-                "FOREIGN KEY (instructorId) REFERENCES Users(userId)" +
+        String create_courses_table = "CREATE TABLE " + COURSES_TABLE_NAME + " (" +
+                COURSES_ID + " INTEGER PRIMARY KEY, " +
+                COURSES_CODE + " TEXT, " +
+                COURSES_NAME + " TEXT, " +
+                COURSES_INSTRUCTOR_ID + " INTEGER, " +
+                COURSES_DESCRIPTION + " TEXT, " +
+                COURSES_CAPACITY + " INTEGER, " +
+                "FOREIGN KEY (" + COURSES_INSTRUCTOR_ID + ") REFERENCES " + USERS_TABLE_NAME + "(" + USERS_ID + ")" +
                 ");";
 
-        String create_times_table = "CREATE TABLE Times (" +
-                "id INTEGER PRIMARY KEY, " +
-                "dateTime TEXT" +
+        String create_times_table = "CREATE TABLE " + TIMES_TABLE_NAME + " (" +
+                TIMES_ID + " INTEGER PRIMARY KEY, " +
+                TIMES_DATETIME + " TEXT" +
                 ");";
 
-        String create_courses_times_table = "CREATE TABLE Courses_Times (" +
-                "courseId INTEGER, " +
-                "timeId INTEGER, " +
-                "FOREIGN KEY (courseId) REFERENCES Courses(id), " +
-                "FOREIGN KEY (timeId) REFERENCES Times(id)" +
+        String create_courses_times_table = "CREATE TABLE " + COURSES_TIMES_TABLE_NAME + " (" +
+                COURSES_TIMES_COURSE_ID + " INTEGER, " +
+                COURSES_TIMES_TIME_ID + " INTEGER, " +
+                "FOREIGN KEY (" + COURSES_TIMES_COURSE_ID + ") REFERENCES " + COURSES_TABLE_NAME + "(" + COURSES_ID + "), " +
+                "FOREIGN KEY (" + COURSES_TIMES_TIME_ID + ") REFERENCES " + TIMES_TABLE_NAME + "(" + TIMES_ID + ")" +
                 ");";
 
         db.execSQL(create_users_table);
@@ -53,22 +79,22 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + "Users");
-        db.execSQL("DROP TABLE IF EXISTS " + "Courses");
-        db.execSQL("DROP TABLE IF EXISTS " + "Courses_Times");
-        db.execSQL("DROP TABLE IF EXISTS " + "Times");
+        db.execSQL("DROP TABLE IF EXISTS " + USERS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + COURSES_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + COURSES_TIMES_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TIMES_TABLE_NAME);
         onCreate(db);
     }
 
     public Cursor getUsers() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + "Users";
+        String query = "SELECT * FROM " + USERS_TABLE_NAME;
         return db.rawQuery(query, null);
     }
 
     public Cursor getCourses() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + "Courses";
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME;
         return db.rawQuery(query, null);
     }
 
@@ -76,11 +102,49 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put("username", user.getUsername());
-        values.put("password", user.getPassword());
-        values.put("userType", user.getUserType());
+        values.put(USERS_USERNAME, user.getUsername());
+        values.put(USERS_PASSWORD, user.getPassword());
+        values.put(USERS_USERTYPE, user.getUserType());
 
-        db.insert("Users", null, values);
+        db.insert(USERS_TABLE_NAME, null, values);
         db.close();
+    }
+
+    public void addCourse(Course course) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COURSES_CODE, course.getCode());
+        values.put(COURSES_NAME, course.getName());
+        values.put(COURSES_INSTRUCTOR_ID, course.getInstructorId());
+        values.put(COURSES_DESCRIPTION, course.getDescription());
+        values.put(COURSES_CAPACITY, course.getCapacity());
+
+        db.insert(COURSES_TABLE_NAME, null, values);
+        db.close();
+    }
+
+    public void deleteUserById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(USERS_TABLE_NAME, USERS_ID + "=" + id, null);
+    }
+
+    public void deleteCourseById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(COURSES_TABLE_NAME, COURSES_ID + "=" + id, null);
+    }
+
+    public void updateCourseById(int id, Course newCourse) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COURSES_ID, id);
+        values.put(COURSES_CODE, newCourse.getCode());
+        values.put(COURSES_NAME, newCourse.getName());
+        values.put(COURSES_INSTRUCTOR_ID, newCourse.getInstructorId());
+        values.put(COURSES_DESCRIPTION, newCourse.getDescription());
+        values.put(COURSES_CAPACITY, newCourse.getCapacity());
+
+        db.update(COURSES_TABLE_NAME, values, COURSES_ID + "=" + id, null);
     }
 }
