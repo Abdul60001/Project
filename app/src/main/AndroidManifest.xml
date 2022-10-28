@@ -13,6 +13,15 @@
         android:theme="@style/Theme.Project"
         tools:targetApi="31">
         <activity
+            android:name=".ViewStudents"
+            android:exported="false" />
+        <activity
+            android:name=".ViewUsersStarter"
+            android:exported="false" />
+        <activity
+            android:name=".AdminStarter"
+            android:exported="false" />
+        <activity
             android:name=".WelcomePage"
             android:exported="false" />
         <activity

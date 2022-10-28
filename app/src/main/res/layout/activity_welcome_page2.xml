@@ -8,9 +8,18 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="298dp"
-        android:layout_height="114dp"
+        android:layout_width="372dp"
+        android:layout_height="186dp"
         android:text="Welcome Admin"
-        tools:layout_editor_absoluteX="48dp"
+        android:textSize="64sp"
+        tools:layout_editor_absoluteX="17dp"
         tools:layout_editor_absoluteY="155dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="128dp"
+        android:layout_height="66dp"
+        android:text="Continue"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="426dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
