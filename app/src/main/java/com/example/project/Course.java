@@ -11,12 +11,14 @@ public class Course {
     public Course() {
     }
 
-    public Course(String code, String name) {
+    public Course(int id, String code, String name) {
+        this.id = id;
         this.code = code;
         this.name = name;
     }
 
-    public Course(String code, String name, int instructorId, String description, int capacity) {
+    public Course(int id, String code, String name, int instructorId, String description, int capacity) {
+        this.id = id;
         this.code = code;
         this.name = name;
         this.instructorId = instructorId;
@@ -70,5 +72,14 @@ public class Course {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public String toString() {
+        return "Id: " + id +
+                "\nCode: " + code +
+                "\nName: " + name +
+                "\nInstructorId: " + instructorId +
+                "\nDescription: " + description +
+                "\nCapacity: " + capacity + "\n";
     }
 }

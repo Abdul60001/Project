@@ -6,7 +6,8 @@ public class User {
     private String password;
     private String userType;
 
-    public User(String username, String password, String userType) {
+    public User(int id, String username, String password, String userType) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.userType = userType;
@@ -45,5 +46,12 @@ public class User {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public String toString() {
+        return "Id: " + id +
+            "\nUsername: " + username +
+            "\nPassword: " + password +
+            "\nUserType: " + userType + "\n";
     }
 }
