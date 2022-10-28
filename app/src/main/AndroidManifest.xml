@@ -13,6 +13,39 @@
         android:theme="@style/Theme.Project"
         tools:targetApi="31">
         <activity
+            android:name=".CreateAccountStep2"
+            android:exported="false" />
+        <activity
+            android:name=".CreateAccount"
+            android:exported="false" />
+        <activity
+            android:name=".CourseSettings"
+            android:exported="false" />
+        <activity
+            android:name=".ManageCourses"
+            android:exported="false" />
+        <activity
+            android:name=".ViewCourses"
+            android:exported="false" />
+        <activity
+            android:name=".ManageInstructors"
+            android:exported="false" />
+        <activity
+            android:name=".ViewInstructors"
+            android:exported="false" />
+        <activity
+            android:name=".ManageStudents"
+            android:exported="false" />
+        <activity
+            android:name=".ViewStudents"
+            android:exported="false" />
+        <activity
+            android:name=".ViewUsersStarter"
+            android:exported="false" />
+        <activity
+            android:name=".AdminStarter"
+            android:exported="false" />
+        <activity
             android:name=".WelcomePage"
             android:exported="false" />
         <activity

@@ -3,7 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_admin_starter.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/activity_course_settings.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/layout/activity_create_account_step2.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/activity_manage_courses.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/layout/activity_manage_instructors.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/layout/activity_manage_students.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/layout/activity_view_courses.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/layout/activity_view_instructors.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/layout/activity_view_students.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/layout/activity_view_users_starter.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_welcome_page2.xml" value="0.24375" />
       </map>
     </option>
