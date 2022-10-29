@@ -32,16 +32,20 @@ public class MainActivity extends AppCompatActivity {
         userList = new ArrayList<>();
         syncUserList();
 
-        //Create Admin User
-        dbHandler.addUser(new User(1, "admin", "admin123", "Admin"));
+        createDefaultAdminUser();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameInput.getText().toString();
+                String username = usernameInput.getText().toString().toLowerCase();
                 String password = passwordInput.getText().toString();
 
-                goToWelcomePage();
+                User userInput = authenticateAndReturnUser(username, password);
+
+                if(userInput!=null) {
+                    System.out.println("Test");
+                    goToWelcomePage(userInput);
+                }
             }
         });
 
@@ -53,13 +57,39 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void createDefaultAdminUser() {
+        if(!usernameAlreadyExists("admin")) {
+            dbHandler.addUser(new User(1, "admin", "admin123", "admin"));
+        }
+        syncUserList();
+    }
+
+    private boolean usernameAlreadyExists(String username) {
+        for(User u : userList) {
+            if(u.getUsername().equals(username.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private User authenticateAndReturnUser(String username, String password) {
+        for(User u : userList) {
+            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
     private void goToCreateAccount() {
         Intent intent = new Intent(this, CreateAccount.class);
         startActivity(intent);
     }
 
-    private void goToWelcomePage() {
+    private void goToWelcomePage(User currentUser) {
         Intent intent = new Intent(this, WelcomePage.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 

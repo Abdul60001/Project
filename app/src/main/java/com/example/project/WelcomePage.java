@@ -12,6 +12,7 @@ public class WelcomePage extends AppCompatActivity {
 
     TextView greeting, userRole;
     Button continueButton;
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +23,18 @@ public class WelcomePage extends AppCompatActivity {
         userRole = findViewById(R.id.textView3);
         continueButton = findViewById(R.id.button3);
 
+        currentUser = (User) getIntent().getSerializableExtra("current_user");
+
+        greeting.setText("Welcome " + currentUser.getUsername() + "!");
+        userRole.setText("User role: " + currentUser.getUserType());
+
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToAdminStarter();
+
+                if(currentUser.getUserType().equals("admin")) {
+                    goToAdminStarter();
+                }
             }
         });
     }

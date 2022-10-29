@@ -51,15 +51,15 @@ public class CreateAccount extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String usernameInput = usernameField.getText().toString();
+                String usernameInput = usernameField.getText().toString().toLowerCase();
                 String passwordInput = passwordField.getText().toString();
                 String confirmPasswordInput = confirmPasswordField.getText().toString();
-                String userRoleInput = userRoleField.getText().toString();
+                String userRoleInput = userRoleField.getText().toString().toLowerCase();
 
                 if(!isValidEmailAddress(usernameInput)) {
                     displayDialogWithMessage("Error: Invalid email address.");
                 }
-                else if(usernameAlreadyExists(userList, usernameInput)) {
+                else if(usernameAlreadyExists(usernameInput)) {
                     displayDialogWithMessage("Error: Username/email already used.");
                 }
                 else if(!passwordInput.equals(confirmPasswordInput)) {
@@ -72,8 +72,9 @@ public class CreateAccount extends AppCompatActivity {
                     displayDialogWithMessage("Error: Invalid role type.");
                 }
                 else {
-                    dbHandler.addUser(new User(usernameInput, passwordInput, userRoleInput));
-                    goToWelcomePage();
+                    User currentUser = new User(usernameInput, passwordInput, userRoleInput);
+                    dbHandler.addUser(currentUser);
+                    goToWelcomePage(currentUser);
                 }
             }
         });
@@ -95,10 +96,10 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private boolean isValidUserRoleInput(String userRoleInput) {
-        return userRoleInput.toLowerCase().equals("student") || userRoleInput.toLowerCase().equals("instructor") || userRoleInput.toLowerCase().equals("admin");
+        return userRoleInput.equals("student") || userRoleInput.equals("instructor") || userRoleInput.equals("admin");
     }
 
-    private boolean usernameAlreadyExists(ArrayList<User> userList, String username) {
+    private boolean usernameAlreadyExists(String username) {
         for(User u : userList) {
             if(u.getUsername().equals(username.toLowerCase())) {
                 return true;
@@ -112,8 +113,9 @@ public class CreateAccount extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToWelcomePage() {
+    private void goToWelcomePage(User currentUser) {
         Intent intent = new Intent(this, WelcomePage.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
