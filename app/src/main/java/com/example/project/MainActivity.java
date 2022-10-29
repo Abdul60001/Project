@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         userList = new ArrayList<>();
         syncUserList();
 
-        //test user
-        dbHandler.addUser(new User(1, "test@t.com", "12345", "Student"));
+        //Create Admin User
+        dbHandler.addUser(new User(1, "admin", "admin123", "Admin"));
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
