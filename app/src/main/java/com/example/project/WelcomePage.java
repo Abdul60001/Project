@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class WelcomePage extends AppCompatActivity {
 
     TextView greeting, userRole;
-    Button continueButton;
+    Button continueButton, signOutButton;
     User currentUser;
 
     @Override
@@ -22,6 +22,7 @@ public class WelcomePage extends AppCompatActivity {
         greeting = findViewById(R.id.textView5);
         userRole = findViewById(R.id.textView3);
         continueButton = findViewById(R.id.button3);
+        signOutButton = findViewById(R.id.button26);
 
         currentUser = (User) getIntent().getSerializableExtra("current_user");
 
@@ -37,6 +38,18 @@ public class WelcomePage extends AppCompatActivity {
                 }
             }
         });
+
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMainActivity();
+            }
+        });
+    }
+
+    private void goToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void goToAdminStarter() {
