@@ -2,6 +2,7 @@ package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -41,16 +42,26 @@ public class MainActivity extends AppCompatActivity {
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();
 
-                syncUserList();
+                goToWelcomePage();
             }
         });
 
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("test2");
+                goToCreateAccount();
             }
         });
+    }
+
+    private void goToCreateAccount() {
+        Intent intent = new Intent(this, CreateAccount.class);
+        startActivity(intent);
+    }
+
+    private void goToWelcomePage() {
+        Intent intent = new Intent(this, WelcomePage.class);
+        startActivity(intent);
     }
 
     private void syncUserList() {
