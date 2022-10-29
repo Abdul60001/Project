@@ -2,6 +2,8 @@ package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -18,10 +20,14 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<User> userList;
     DBHandler dbHandler;
 
+    AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        builder = new AlertDialog.Builder(this);
 
         usernameInput = findViewById(R.id.editTextTextEmailAddress);
         passwordInput = findViewById(R.id.editTextTextPassword);
@@ -43,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
                 User userInput = authenticateAndReturnUser(username, password);
 
                 if(userInput!=null) {
-                    System.out.println("Test");
                     goToWelcomePage(userInput);
+                }
+                else {
+                    displayDialogWithMessage("Error: Invalid password or account does not exist.");
                 }
             }
         });
@@ -55,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
                 goToCreateAccount();
             }
         });
+    }
+
+    private void displayDialogWithMessage(String message) {
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {}
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private void createDefaultAdminUser() {
