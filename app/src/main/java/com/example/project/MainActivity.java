@@ -23,13 +23,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbHandler = new DBHandler(this);
-
         usernameInput = findViewById(R.id.editTextTextEmailAddress);
         passwordInput = findViewById(R.id.editTextTextPassword);
         login = findViewById(R.id.button2);
         createAccount = findViewById(R.id.button);
 
+        dbHandler = new DBHandler(this);
         userList = new ArrayList<>();
         syncUserList();
 
