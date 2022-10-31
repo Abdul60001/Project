@@ -11,6 +11,8 @@ public class AdminStarter extends AppCompatActivity {
 
     Button manageUsers, viewCourses, back;
 
+    User currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,8 @@ public class AdminStarter extends AppCompatActivity {
         manageUsers = findViewById(R.id.button4);
         viewCourses = findViewById(R.id.button5);
         back = findViewById(R.id.button6);
+
+        currentUser = (User) getIntent().getSerializableExtra("current_user");
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,16 +43,19 @@ public class AdminStarter extends AppCompatActivity {
 
     private void goToWelcomePage() {
         Intent intent = new Intent(this, WelcomePage.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
     private void goToManageUsers() {
         Intent intent = new Intent(this,ManageUsers.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
     private void goToViewCourses() {
         Intent intent = new Intent(this, ViewCourses.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 }

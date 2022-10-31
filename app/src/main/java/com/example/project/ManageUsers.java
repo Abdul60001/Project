@@ -24,6 +24,8 @@ public class ManageUsers extends AppCompatActivity {
 
     AlertDialog.Builder builder;
 
+    User currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +33,10 @@ public class ManageUsers extends AppCompatActivity {
 
         builder = new AlertDialog.Builder(this);
 
-        manage = findViewById(R.id.button10);
         back = findViewById(R.id.button13);
         usersListView = findViewById(R.id.listview1);
+
+        currentUser = (User) getIntent().getSerializableExtra("current_user");
 
         dbHandler = new DBHandler(this);
         usersList = new ArrayList<>();
@@ -68,6 +71,7 @@ public class ManageUsers extends AppCompatActivity {
 
     private void goToAdminStarter() {
         Intent intent = new Intent(this, AdminStarter.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 

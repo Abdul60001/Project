@@ -54,6 +54,7 @@ public class WelcomePage extends AppCompatActivity {
 
     private void goToAdminStarter() {
         Intent intent = new Intent(this, AdminStarter.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 }
