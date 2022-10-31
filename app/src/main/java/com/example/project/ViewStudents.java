@@ -27,10 +27,19 @@ public class ViewStudents extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {goToViewUsersStarter();}
         });
+
+        manage.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {goToManageStudents();}
+        });
     }
 
     private void goToViewUsersStarter() {
         Intent intent = new Intent(this, ViewUsersStarter.class);
+        startActivity(intent);
+    }
+
+    private void goToManageStudents() {
+        Intent intent = new Intent(this, ManageStudents.class);
         startActivity(intent);
     }
 }

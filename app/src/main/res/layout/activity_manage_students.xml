@@ -10,41 +10,53 @@
         android:id="@+id/textView9"
         android:layout_width="283dp"
         android:layout_height="98dp"
+        android:layout_marginTop="48dp"
         android:text="Manage Students"
         android:textSize="32sp"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="44dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="277dp"
         android:layout_height="54dp"
+        android:layout_marginTop="60dp"
         android:text="Student 1"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="211dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.373"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <CheckBox
         android:id="@+id/checkBox2"
         android:layout_width="277dp"
         android:layout_height="54dp"
+        android:layout_marginTop="24dp"
         android:text="Student 2"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="302dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.373"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     <Button
         android:id="@+id/button11"
         android:layout_width="130dp"
         android:layout_height="71dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="28dp"
         android:text="Delete"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="637dp" />
+        app:layout_constraintEnd_toStartOf="@+id/button12"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
     <Button
         android:id="@+id/button12"
         android:layout_width="132dp"
         android:layout_height="68dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="64dp"
         android:text="Back"
-        tools:layout_editor_absoluteX="204dp"
-        tools:layout_editor_absoluteY="637dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
