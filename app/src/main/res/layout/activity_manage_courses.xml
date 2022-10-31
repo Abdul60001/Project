@@ -10,35 +10,50 @@
         android:id="@+id/textView18"
         android:layout_width="224dp"
         android:layout_height="69dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
         android:text="SEG2105\nSoftware Engineering"
         android:textSize="23sp"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="255dp" />
+        app:layout_constraintEnd_toStartOf="@+id/button21"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <Button
         android:id="@+id/button20"
         android:layout_width="128dp"
         android:layout_height="62dp"
+        android:layout_marginTop="252dp"
+        android:layout_marginEnd="140dp"
         android:text="Back"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="597dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button21"
         android:layout_width="125dp"
         android:layout_height="65dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="32dp"
         android:text="Manage"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="255dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="259dp"
         android:layout_height="89dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="559dp"
         android:text="Courses"
         android:textSize="64sp"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="73dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button27"
@@ -47,4 +62,5 @@
         android:text="Add Course"
         tools:layout_editor_absoluteX="218dp"
         tools:layout_editor_absoluteY="597dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
