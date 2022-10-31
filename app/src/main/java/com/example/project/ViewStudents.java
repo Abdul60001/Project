@@ -20,6 +20,7 @@ public class ViewStudents extends AppCompatActivity {
         setContentView(R.layout.activity_view_students);
         manage = findViewById(R.id.button10);
         back = findViewById(R.id.button13);
+
         ListView listView = (ListView) findViewById(R.id.listview1);
         ArrayList<String> users = new ArrayList<>();
 
