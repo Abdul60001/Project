@@ -54,4 +54,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button27"
+        android:layout_width="131dp"
+        android:layout_height="63dp"
+        android:text="Add Course"
+        tools:layout_editor_absoluteX="218dp"
+        tools:layout_editor_absoluteY="597dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
