@@ -26,10 +26,29 @@ public class AdminStarter extends AppCompatActivity {
                 goToWelcomePage();
             }
         });
+
+        viewUsers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {goToViewUsersStarter();}
+        });
+
+        viewCourses.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {goToViewCourses();}
+        });
     }
 
     private void goToWelcomePage() {
         Intent intent = new Intent(this, WelcomePage.class);
+        startActivity(intent);
+    }
+
+    private void goToViewUsersStarter() {
+        Intent intent = new Intent(this,ViewUsersStarter.class);
+        startActivity(intent);
+    }
+
+    private void goToViewCourses() {
+        Intent intent = new Intent(this, ViewCourses.class);
         startActivity(intent);
     }
 }
