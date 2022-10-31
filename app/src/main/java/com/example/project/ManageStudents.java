@@ -24,7 +24,7 @@ public class ManageStudents extends AppCompatActivity {
     }
 
     private void goToViewStudents() {
-        Intent intent = new Intent(this, ViewStudents.class);
+        Intent intent = new Intent(this, ManageUsers.class);
         startActivity(intent);
     }
 }

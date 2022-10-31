@@ -9,14 +9,14 @@ import android.widget.Button;
 
 public class AdminStarter extends AppCompatActivity {
 
-    Button viewUsers, viewCourses, back;
+    Button manageUsers, viewCourses, back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_starter);
 
-        viewUsers = findViewById(R.id.button4);
+        manageUsers = findViewById(R.id.button4);
         viewCourses = findViewById(R.id.button5);
         back = findViewById(R.id.button6);
 
@@ -27,9 +27,9 @@ public class AdminStarter extends AppCompatActivity {
             }
         });
 
-        viewUsers.setOnClickListener(new View.OnClickListener() {
+        manageUsers.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {goToViewUsersStarter();}
+            public void onClick(View v) {goToManageUsers();}
         });
 
         viewCourses.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +42,8 @@ public class AdminStarter extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToViewUsersStarter() {
-        Intent intent = new Intent(this,ViewUsersStarter.class);
+    private void goToManageUsers() {
+        Intent intent = new Intent(this,ManageUsers.class);
         startActivity(intent);
     }
 

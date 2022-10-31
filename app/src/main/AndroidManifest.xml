@@ -37,7 +37,7 @@
             android:name=".ManageStudents"
             android:exported="false" />
         <activity
-            android:name=".ViewStudents"
+            android:name=".ManageUsers"
             android:exported="false" />
         <activity
             android:name=".ViewUsersStarter"
