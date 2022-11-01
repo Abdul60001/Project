@@ -37,7 +37,8 @@ public class AdminStarter extends AppCompatActivity {
         });
 
         viewCourses.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {goToViewCourses();}
+            public void onClick(View v) {
+                goToManageCourses();}
         });
     }
 
@@ -53,8 +54,8 @@ public class AdminStarter extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToViewCourses() {
-        Intent intent = new Intent(this, ViewCourses.class);
+    private void goToManageCourses() {
+        Intent intent = new Intent(this, ManageCourses.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }

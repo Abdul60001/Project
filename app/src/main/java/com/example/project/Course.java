@@ -1,6 +1,8 @@
 package com.example.project;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     private int id;
     private String code;
     private String name;
@@ -11,8 +13,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(int id, String code, String name) {
-        this.id = id;
+    public Course(String code, String name) {
         this.code = code;
         this.name = name;
     }

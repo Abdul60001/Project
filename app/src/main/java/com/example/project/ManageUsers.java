@@ -15,7 +15,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 public class ManageUsers extends AppCompatActivity {
-    Button manage,back;
+    Button back;
     ListView usersListView;
 
     ArrayList<User> usersList;

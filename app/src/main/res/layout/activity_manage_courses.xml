@@ -7,60 +7,48 @@
     tools:context=".ManageCourses">
 
     <TextView
-        android:id="@+id/textView18"
-        android:layout_width="224dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
-        android:text="SEG2105\nSoftware Engineering"
-        android:textSize="23sp"
-        app:layout_constraintEnd_toStartOf="@+id/button21"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:id="@+id/textView19"
+        android:layout_width="375dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="Manage Courses"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button20"
-        android:layout_width="128dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="252dp"
-        android:layout_marginEnd="140dp"
+        android:layout_width="135dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="80dp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/button21"
-        android:layout_width="125dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="32dp"
-        android:text="Manage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="259dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="559dp"
-        android:text="Courses"
-        android:textSize="64sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button27" />
 
     <Button
         android:id="@+id/button27"
-        android:layout_width="131dp"
-        android:layout_height="63dp"
-        android:text="Add Course"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="597dp" />
+        android:layout_width="135dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="80dp"
+        android:text="New"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button20"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ListView
+        android:id="@+id/listview2"
+        android:layout_width="409dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
