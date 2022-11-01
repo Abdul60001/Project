@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="328dp"
-        android:layout_height="64dp"
+        android:layout_height="128dp"
         android:layout_marginTop="25dp"
         android:gravity="center"
         android:text="User Role: ____"
@@ -36,7 +36,7 @@
         android:id="@+id/button3"
         android:layout_width="128dp"
         android:layout_height="66dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="Continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

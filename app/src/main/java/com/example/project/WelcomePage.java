@@ -27,7 +27,7 @@ public class WelcomePage extends AppCompatActivity {
         currentUser = (User) getIntent().getSerializableExtra("current_user");
 
         greeting.setText("Welcome " + currentUser.getUsername() + "!");
-        userRole.setText("User role: " + currentUser.getUserType());
+        userRole.setText("You are logged in as " + currentUser.getUserType());
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +54,7 @@ public class WelcomePage extends AppCompatActivity {
 
     private void goToAdminStarter() {
         Intent intent = new Intent(this, AdminStarter.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 }

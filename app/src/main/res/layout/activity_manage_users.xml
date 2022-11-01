@@ -4,45 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewStudents">
+    tools:context=".ManageUsers">
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="298dp"
+        android:layout_width="375dp"
         android:layout_height="80dp"
         android:layout_marginTop="4dp"
-        android:text="Students"
-        android:textSize="64sp"
+        android:gravity="center"
+        android:text="Manage Users"
+        android:textSize="54sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button10"
-        android:layout_width="135dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="80dp"
-        android:text="Manage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/button13"
         android:layout_width="135dp"
         android:layout_height="72dp"
-        android:layout_marginEnd="40dp"
         android:layout_marginBottom="80dp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ListView
         android:id="@+id/listview1"
         android:layout_width="409dp"
-        android:layout_height="362dp"
-        android:layout_marginTop="72dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />

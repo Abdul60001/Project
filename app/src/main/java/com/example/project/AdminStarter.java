@@ -9,16 +9,20 @@ import android.widget.Button;
 
 public class AdminStarter extends AppCompatActivity {
 
-    Button viewUsers, viewCourses, back;
+    Button manageUsers, viewCourses, back;
+
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_starter);
 
-        viewUsers = findViewById(R.id.button4);
+        manageUsers = findViewById(R.id.button4);
         viewCourses = findViewById(R.id.button5);
         back = findViewById(R.id.button6);
+
+        currentUser = (User) getIntent().getSerializableExtra("current_user");
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,28 +31,32 @@ public class AdminStarter extends AppCompatActivity {
             }
         });
 
-        viewUsers.setOnClickListener(new View.OnClickListener() {
+        manageUsers.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {goToViewUsersStarter();}
+            public void onClick(View v) {goToManageUsers();}
         });
 
         viewCourses.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {goToViewCourses();}
+            public void onClick(View v) {
+                goToManageCourses();}
         });
     }
 
     private void goToWelcomePage() {
         Intent intent = new Intent(this, WelcomePage.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
-    private void goToViewUsersStarter() {
-        Intent intent = new Intent(this,ViewUsersStarter.class);
+    private void goToManageUsers() {
+        Intent intent = new Intent(this,ManageUsers.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
-    private void goToViewCourses() {
-        Intent intent = new Intent(this, ViewCourses.class);
+    private void goToManageCourses() {
+        Intent intent = new Intent(this, ManageCourses.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 }
