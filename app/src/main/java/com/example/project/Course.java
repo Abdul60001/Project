@@ -1,5 +1,7 @@
 package com.example.project;
 
+import android.text.Editable;
+
 import java.io.Serializable;
 
 public class Course implements Serializable {
@@ -8,9 +10,14 @@ public class Course implements Serializable {
     private String name;
     private int instructorId;
     private String description;
+    private String courseDays;
+    private String courseHours;
     private int capacity;
 
-    public Course() {
+
+
+
+    public Course(String courseDayInput, String courseHourInput, String courseDescriptionInput, Integer courseStudentCapacityInput) {
     }
 
     public Course(String code, String name) {
@@ -25,6 +32,16 @@ public class Course implements Serializable {
         this.instructorId = instructorId;
         this.description = description;
         this.capacity = capacity;
+    }
+
+
+    public Course(String code, String name,String courseDays, String courseHours, int capacity,String description) {
+        this.code=code;
+        this.code=name;
+        this.courseDays = courseDays;
+        this.courseHours = courseHours;
+        this.capacity = capacity;
+        this.description=description;
     }
 
     public int getId() {
@@ -67,6 +84,22 @@ public class Course implements Serializable {
         this.description = description;
     }
 
+    public String getCourseDays() {
+        return courseDays;
+    }
+
+    public void setCourseDays(String courseDays) {
+        this.courseDays = courseDays;
+    }
+
+    public String getCourseHours() {
+        return courseHours;
+    }
+
+    public void setCourseHours(String courseHours) {
+        this.courseHours = courseHours;
+    }
+
     public int getCapacity() {
         return capacity;
     }
@@ -82,5 +115,11 @@ public class Course implements Serializable {
                 "\nInstructorId: " + instructorId +
                 "\nDescription: " + description +
                 "\nCapacity: " + capacity + "\n";
+    }
+    public String toStringS(){
+        return "Course Days:  "+courseDays+
+                "\nCourse Hours: "+courseHours+
+                "\nCourse Description: "+description+
+                "\nCourse Capacity: " + capacity+ "\n";
     }
 }

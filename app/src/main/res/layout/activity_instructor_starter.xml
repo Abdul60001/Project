@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InstructorStarter">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="274dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Instructor, please select an action"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button33"
+            android:layout_width="224dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="112dp"
+            android:text="View Courses"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView22" />
+
+        <Button
+            android:id="@+id/button34"
+            android:layout_width="224dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="96dp"
+            android:text="Assign Course"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/button33" />
+
+        <Button
+            android:id="@+id/button44"
+            android:layout_width="224dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="86dp"
+            android:text="View Assigned Course"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/button34" />
+
+        <Button
+            android:id="@+id/button36"
+            android:layout_width="224dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="90dp"
+            android:text="Add and edit course details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/button44" />
+
+        <Button
+            android:id="@+id/button35"
+            android:layout_width="244dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="102dp"
+            android:text="Back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/button36" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

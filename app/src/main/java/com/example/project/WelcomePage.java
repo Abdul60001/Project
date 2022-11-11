@@ -36,6 +36,9 @@ public class WelcomePage extends AppCompatActivity {
                 if(currentUser.getUserType().equals("admin")) {
                     goToAdminStarter();
                 }
+                if(currentUser.getUserType().equals("instructor")){
+                    goToInstructorStarter();
+                }
             }
         });
 
@@ -49,6 +52,10 @@ public class WelcomePage extends AppCompatActivity {
 
     private void goToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    private void goToInstructorStarter() {
+        Intent intent = new Intent(this, InstructorStarter.class);
         startActivity(intent);
     }
 
