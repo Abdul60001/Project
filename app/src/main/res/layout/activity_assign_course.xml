@@ -7,16 +7,18 @@
     tools:context=".AssignCourse">
 
 
-
-
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="325dp"
-        android:layout_height="106dp"
-        android:text="Assign Course"
+        android:layout_width="351dp"
+        android:layout_height="157dp"
+        android:layout_marginTop="39dp"
+        android:gravity="center"
+        android:text="Search and Assign Course"
         android:textSize="48sp"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="80dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextTextPersonName11"

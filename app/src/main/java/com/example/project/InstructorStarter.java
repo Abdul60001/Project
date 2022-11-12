@@ -1,5 +1,6 @@
 package com.example.project;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,7 @@ import android.widget.Button;
 public class InstructorStarter extends AppCompatActivity {
     Button viewCourse, assignCourse,viewAssignedCourses,addEdit, back;
     User currentUser;
+    DBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,8 @@ public class InstructorStarter extends AppCompatActivity {
         viewAssignedCourses=findViewById(R.id.button44);
         addEdit = findViewById(R.id.button36);
         back = findViewById(R.id.button35);
+
+        dbHandler = new DBHandler(this);
 
         currentUser = (User) getIntent().getSerializableExtra("current_user");
 
@@ -40,6 +44,7 @@ public class InstructorStarter extends AppCompatActivity {
             public void onClick(View v) {
                 goToAssignCourse();}
         });
+
         viewAssignedCourses.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 goToViewAssignedCoursesInstructor();}
@@ -62,14 +67,15 @@ public class InstructorStarter extends AppCompatActivity {
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
-    private void goToViewAssignedCoursesInstructor() {
-        Intent intent = new Intent(this, ViewAssignedCoursesInstructor.class);
+
+    private void goToAssignCourse() {
+        Intent intent = new Intent(this, AssignCourse.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
-    private void goToAssignCourse() {
-        Intent intent = new Intent(this, AssignCourse.class);
+    private void goToViewAssignedCoursesInstructor() {
+        Intent intent = new Intent(this, ViewAssignedCoursesInstructor.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }

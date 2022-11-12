@@ -39,6 +39,11 @@ public class Course implements Serializable {
     public Course(String code, String name) {
         this.code = code;
         this.name = name;
+        this.instructorId = -1;
+        this.description = "";
+        this.courseDay = "";
+        this.courseHours = "";
+        this.capacity = 0;
     }
 
     public int getId() {

@@ -44,7 +44,7 @@
             android:name=".AddInfo"
             android:exported="true" />
         <activity
-            android:name=".ViewCourses"
+            android:name=".ViewCoursesAdmin"
             android:exported="false" />
         <activity
             android:name=".ManageInstructors"

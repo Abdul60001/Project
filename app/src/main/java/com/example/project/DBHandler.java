@@ -98,9 +98,35 @@ public class DBHandler extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
     }
 
+    public Cursor getUsersById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + USERS_TABLE_NAME + " WHERE " + USERS_ID + "=" + id;
+        return db.rawQuery(query, null);
+    }
+
     public Cursor getCourses() {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + COURSES_TABLE_NAME;
+        return db.rawQuery(query, null);
+    }
+
+    public Cursor getCoursesByInstructorId(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_INSTRUCTOR_ID + "=" + id;
+        return db.rawQuery(query, null);
+    }
+
+    public Cursor getCoursesByCodeAndName(String code, String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_CODE + " LIKE " + code + " AND " + COURSES_NAME + " LIKE " + name;
+
+        if(code.equals("") && !name.equals("")) {
+            query = "SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_NAME + " LIKE " + name;
+        }
+        else if(!code.equals("") && name.equals("")) {
+            query = "SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_CODE + " LIKE " + code;
+        }
+        
         return db.rawQuery(query, null);
     }
 
@@ -131,19 +157,22 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert(COURSES_TABLE_NAME, null, values);
         db.close();
     }
-    public void assignCourse(Course course) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
 
-        values.put(COURSES_CODE, course.getCode());
-        values.put(COURSES_NAME, course.getName());
-        values.put(COURSES_INSTRUCTOR_ID, course.getInstructorId());
-        values.put(COURSES_DESCRIPTION, course.getDescription());
-        values.put(COURSES_CAPACITY, course.getCapacity());
-
-        db.insert(COURSES_TABLE_NAME, null, values);
-        db.close();
-    }
+//    public void assignInstructorToCourse(User instructor, Course course) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//
+//        values.put(COURSES_ID, course.getId());
+//        values.put(COURSES_CODE, course.getCode());
+//        values.put(COURSES_NAME, course.getName());
+//        values.put(COURSES_INSTRUCTOR_ID, instructor.getId());
+//        values.put(COURSES_DESCRIPTION, course.getDescription());
+//        values.put(COURSES_DAY, course.getCourseDay());
+//        values.put(COURSES_HOURS, course.getCourseHours());
+//        values.put(COURSES_CAPACITY, course.getCapacity());
+//
+//        db.update(COURSES_TABLE_NAME, values, COURSES_ID + "=" + course.getId(), null);
+//    }
 
 
     public void addCourseINFO(String courseDay,String courseHour,int courseCapacity,String courseDescription){
