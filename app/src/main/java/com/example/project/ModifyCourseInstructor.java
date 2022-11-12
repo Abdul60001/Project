@@ -12,6 +12,7 @@ public class ModifyCourseInstructor extends AppCompatActivity {
     // INSTRUCTOR CAN ADD OR EDIT COURSE INFORMATION (COURSES: DAY, HOUR , CAPACITY , DESCRIPTION ).
     Button addDetails, editDetails, back;
     TextView addInformation;
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,27 +23,34 @@ public class ModifyCourseInstructor extends AppCompatActivity {
         editDetails = findViewById(R.id.button31);
         back= findViewById(R.id.button39);
 
+        currentUser = (User) getIntent().getSerializableExtra("current_user");
+
         back.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {goToInstructorStarter();}
         });
         addDetails.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {goToaddinfo();}
+            public void onClick(View v) {
+                goToAddInfo();}
         });
         editDetails.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {goToeditCourseInfo();}
+            public void onClick(View v) {
+                goToEditCourseInfo();}
         });
     }
 
     private void goToInstructorStarter() {
         Intent intent = new Intent(this,InstructorStarter.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
-    private void goToaddinfo() {
-        Intent intent = new Intent(this,addInfo.class);
+    private void goToAddInfo() {
+        Intent intent = new Intent(this, AddInfo.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
-    private void goToeditCourseInfo() {
-        Intent intent = new Intent(this,editCourseInfo.class);
+    private void goToEditCourseInfo() {
+        Intent intent = new Intent(this, EditCourseInfo.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 

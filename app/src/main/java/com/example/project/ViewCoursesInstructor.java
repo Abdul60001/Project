@@ -48,20 +48,22 @@ public class ViewCoursesInstructor extends AppCompatActivity {
 
     private void goToInstructorStarter() {
         Intent intent = new Intent(this,InstructorStarter.class);
-        startActivity(intent);
-    }
-    private void goToEditCourse(Course selectedCourse) {
-        Intent intent = new Intent(this, EditCourses.class);
         intent.putExtra("current_user", currentUser);
-        intent.putExtra("selected_course", selectedCourse);
         startActivity(intent);
     }
-    private void goToAssignCourse(Course selectedCourse) {
-        Intent intent = new Intent(this, AssignCourse.class);
-        intent.putExtra("current_user", currentUser);
-        intent.putExtra("selected_course", selectedCourse);
-        startActivity(intent);
-    }
+
+//    private void goToEditCourse(Course selectedCourse) {
+//        Intent intent = new Intent(this, EditCourses.class);
+//        intent.putExtra("current_user", currentUser);
+//        intent.putExtra("selected_course", selectedCourse);
+//        startActivity(intent);
+//    }
+//    private void goToAssignCourse(Course selectedCourse) {
+//        Intent intent = new Intent(this, AssignCourse.class);
+//        intent.putExtra("current_user", currentUser);
+//        intent.putExtra("selected_course", selectedCourse);
+//        startActivity(intent);
+//    }
 
     private void syncCourseList() {
         coursesList2.clear();

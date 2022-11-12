@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.project.databinding.ActivityWelcomePage2Binding;
-
 
 public class InstructorStarter extends AppCompatActivity {
     Button viewCourse, assignCourse,viewAssignedCourses,addEdit, back;
@@ -29,7 +27,7 @@ public class InstructorStarter extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToWelcomePage2();
+                goToWelcomePage();
             }
         });
 
@@ -44,7 +42,7 @@ public class InstructorStarter extends AppCompatActivity {
         });
         viewAssignedCourses.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                goToviewAssignedCoursesInstructor();}
+                goToViewAssignedCoursesInstructor();}
         });
 
         addEdit.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +51,8 @@ public class InstructorStarter extends AppCompatActivity {
         });
 
     }
-    private void goToWelcomePage2() {
-        Intent intent = new Intent(this, ActivityWelcomePage2Binding.class);
+    private void goToWelcomePage() {
+        Intent intent = new Intent(this, WelcomePage.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
@@ -64,8 +62,8 @@ public class InstructorStarter extends AppCompatActivity {
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
-    private void goToviewAssignedCoursesInstructor() {
-        Intent intent = new Intent(this, viewAssignedCoursesInsutructor.class);
+    private void goToViewAssignedCoursesInstructor() {
+        Intent intent = new Intent(this, ViewAssignedCoursesInstructor.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }

@@ -9,12 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class editCourseInfo extends AppCompatActivity {
+public class AddInfo extends AppCompatActivity {
+    // ADD COURSE INFROMATION ( COURSE DAY , COURSE HOURS , COURSE CAPACITY , COURSE DESCRIPTION ).
 
     Button save, back;
     TextView course;
 
-    EditText courseDay, courseHour,courseCapacity,courseDescription;
+    EditText courseCode,courseName,courseDay, courseHour,courseCapacity,courseDescription;
     DBHandler dbHandler;
 
     User currentUser;
@@ -27,17 +28,19 @@ public class editCourseInfo extends AppCompatActivity {
 
 
         course = findViewById(R.id.textView25);
-        courseDay = findViewById(R.id.editTextTextPersonName7); // title_input
-        courseHour = findViewById(R.id.editTextTextPersonName9); //author_input
-        courseCapacity= findViewById(R.id.editTextTextPersonName10); //page_input
-        courseDescription=findViewById(R.id.editTextTextPersonName17);//text_input
+        courseCode=findViewById(R.id.editTextTextPersonName8);
+        courseName=findViewById(R.id.editTextTextPersonName18);
+        courseDay = findViewById(R.id.editTextTextPersonName12); // title_input
+        courseHour = findViewById(R.id.editTextTextPersonName14); //author_input
+        courseCapacity= findViewById(R.id.editTextTextPersonName15); //page_input
+        courseDescription=findViewById(R.id.editTextTextPersonName16);//text_input
         back = findViewById(R.id.button41);
         save = findViewById(R.id.button40);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBHandler myDB=new DBHandler(editCourseInfo.this);
-                myDB.editCourseINFO(courseDay.getText().toString().trim(),
+                DBHandler myDB=new DBHandler(AddInfo.this);
+                myDB.addCourseINFO(courseDay.getText().toString().trim(),
                         courseHour.getText().toString().trim(),
                         Integer.valueOf(courseCapacity.getText().toString().trim()),
                         courseDescription.getText().toString().trim());
@@ -45,7 +48,7 @@ public class editCourseInfo extends AppCompatActivity {
 
         });
         back.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {goToModifyCourseInstructor();}
+            public void onClick(View v) {goToInstructorStarter();}
         });
     }
 
@@ -54,8 +57,9 @@ public class editCourseInfo extends AppCompatActivity {
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
-    private void goToModifyCourseInstructor() {
-        Intent intent = new Intent(this,ModifyCourseInstructor.class);
+    private void goToInstructorStarter() {
+        Intent intent = new Intent(this,InstructorStarter.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 }

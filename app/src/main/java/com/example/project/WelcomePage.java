@@ -56,6 +56,7 @@ public class WelcomePage extends AppCompatActivity {
     }
     private void goToInstructorStarter() {
         Intent intent = new Intent(this, InstructorStarter.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 

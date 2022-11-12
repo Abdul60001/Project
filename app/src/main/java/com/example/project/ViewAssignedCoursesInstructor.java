@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class viewAssignedCoursesInsutructor extends AppCompatActivity {
+public class ViewAssignedCoursesInstructor extends AppCompatActivity {
 
     // View assigned courses by instructor
 

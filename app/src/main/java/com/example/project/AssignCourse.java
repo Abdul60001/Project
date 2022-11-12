@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.ResourceBundle;
-
 public class AssignCourse extends AppCompatActivity {
 
     // Instructor assign course to him self, after clicking the assign button , the assigned courses should show in "VIEW ASSGINED COURSES WINDOW"
@@ -60,7 +58,7 @@ public class AssignCourse extends AppCompatActivity {
                     dbHandler.assignCourse(new Course(courseCodeInput, courseNameInput));
                 }
 
-                goToviewAssignedCoursesInstructor();
+                goToViewAssignedCoursesInstructor();
             }
         });
 
@@ -72,12 +70,14 @@ public class AssignCourse extends AppCompatActivity {
 
     }
 
-    private void goToviewAssignedCoursesInstructor() {
-        Intent intent = new Intent(this, viewAssignedCoursesInsutructor.class);
+    private void goToViewAssignedCoursesInstructor() {
+        Intent intent = new Intent(this, ViewAssignedCoursesInstructor.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
     private void goToInstructorStarter() {
         Intent intent = new Intent(this, InstructorStarter.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 }
