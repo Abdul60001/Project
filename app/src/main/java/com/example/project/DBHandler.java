@@ -28,20 +28,9 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COURSES_NAME = "name";
     private static final String COURSES_INSTRUCTOR_ID = "instructorId";
     private static final String COURSES_DESCRIPTION = "description";
+    private static final String COURSES_DAY = "day";
+    private static final String COURSES_HOURS = "hours";
     private static final String COURSES_CAPACITY = "capacity";
-
-
-
-    //times table variables
-    private static final String TIMES_TABLE_NAME = "Times";
-    private static final String TIMES_ID = "id";
-    private static final String TIMES_DATETIME = "dateTime";
-
-    //courses_times table variables
-    private static final String COURSES_TIMES_TABLE_NAME = "Course_Times";
-    private static final String COURSES_TIMES_COURSE_ID = "courseId";
-    private static final String COURSES_TIMES_TIME_ID = "timeId";
-
 
     //Course Information for instructor
     private static final String TABLE_NAME="course_Information";
@@ -73,20 +62,10 @@ public class DBHandler extends SQLiteOpenHelper {
                 COURSES_NAME + " TEXT, " +
                 COURSES_INSTRUCTOR_ID + " INTEGER, " +
                 COURSES_DESCRIPTION + " TEXT, " +
+                COURSES_DAY + " TEXT, " +
+                COURSES_HOURS + " TEXT, " +
                 COURSES_CAPACITY + " INTEGER, " +
                 "FOREIGN KEY (" + COURSES_INSTRUCTOR_ID + ") REFERENCES " + USERS_TABLE_NAME + "(" + USERS_ID + ")" +
-                ");";
-
-        String create_times_table = "CREATE TABLE " + TIMES_TABLE_NAME + " (" +
-                TIMES_ID + " INTEGER PRIMARY KEY, " +
-                TIMES_DATETIME + " TEXT" +
-                ");";
-
-        String create_courses_times_table = "CREATE TABLE " + COURSES_TIMES_TABLE_NAME + " (" +
-                COURSES_TIMES_COURSE_ID + " INTEGER, " +
-                COURSES_TIMES_TIME_ID + " INTEGER, " +
-                "FOREIGN KEY (" + COURSES_TIMES_COURSE_ID + ") REFERENCES " + COURSES_TABLE_NAME + "(" + COURSES_ID + "), " +
-                "FOREIGN KEY (" + COURSES_TIMES_TIME_ID + ") REFERENCES " + TIMES_TABLE_NAME + "(" + TIMES_ID + ")" +
                 ");";
 
         String courseInfo="CREATE TABLE "+TABLE_NAME+  // Store course day, hour , capacity, description by instructor.
@@ -101,8 +80,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.execSQL(create_users_table);
         db.execSQL(create_courses_table);
-        db.execSQL(create_times_table);
-        db.execSQL(create_courses_times_table);
         db.execSQL(courseInfo);
 
     }
@@ -111,8 +88,6 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + USERS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + COURSES_TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + COURSES_TIMES_TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + TIMES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
@@ -149,6 +124,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COURSES_NAME, course.getName());
         values.put(COURSES_INSTRUCTOR_ID, course.getInstructorId());
         values.put(COURSES_DESCRIPTION, course.getDescription());
+        values.put(COURSES_DAY, course.getCourseDay());
+        values.put(COURSES_HOURS, course.getCourseHours());
         values.put(COURSES_CAPACITY, course.getCapacity());
 
         db.insert(COURSES_TABLE_NAME, null, values);
@@ -224,7 +201,10 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COURSES_NAME, newCourse.getName());
         values.put(COURSES_INSTRUCTOR_ID, newCourse.getInstructorId());
         values.put(COURSES_DESCRIPTION, newCourse.getDescription());
+        values.put(COURSES_DAY, newCourse.getCourseDay());
+        values.put(COURSES_HOURS, newCourse.getCourseHours());
         values.put(COURSES_CAPACITY, newCourse.getCapacity());
 
+        db.update(COURSES_TABLE_NAME, values, COURSES_ID + "=" + id, null);
     }
 }

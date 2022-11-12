@@ -68,7 +68,7 @@ public class ViewAssignedCoursesInstructor extends AppCompatActivity {
         assignedCourses.clear();
         Cursor cursor = dbHandler.getCourses();
         while (cursor.moveToNext()) {
-            assignedCourses.add(new Course(Integer.valueOf(cursor.getInt(0)), cursor.getString(1), cursor.getString(2), Integer.valueOf(cursor.getString(3)), cursor.getString(4), Integer.valueOf(cursor.getString(5))));
+            assignedCourses.add(new Course(Integer.valueOf(cursor.getInt(0)), cursor.getString(1), cursor.getString(2), Integer.valueOf(cursor.getString(3)), cursor.getString(4), cursor.getString(5), cursor.getString(6), Integer.valueOf(cursor.getString(7))));
         }
         cursor.close();
 

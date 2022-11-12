@@ -1,7 +1,5 @@
 package com.example.project;
 
-import android.text.Editable;
-
 import java.io.Serializable;
 
 public class Course implements Serializable {
@@ -10,38 +8,37 @@ public class Course implements Serializable {
     private String name;
     private int instructorId;
     private String description;
-    private String courseDays;
+    private String courseDay;
     private String courseHours;
     private int capacity;
 
-
-
-
-    public Course(String courseDayInput, String courseHourInput, String courseDescriptionInput, Integer courseStudentCapacityInput) {
-    }
-
-    public Course(String code, String name) {
-        this.code = code;
-        this.name = name;
-    }
-
-    public Course(int id, String code, String name, int instructorId, String description, int capacity) {
+    //Used to create a course class based on date received from the database
+    public Course(int id, String code, String name, int instructorId, String description, String courseDay, String courseHours, int capacity) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.instructorId = instructorId;
         this.description = description;
+        this.courseDay = courseDay;
+        this.courseHours = courseHours;
         this.capacity = capacity;
     }
 
-
-    public Course(String code, String name,String courseDays, String courseHours, int capacity,String description) {
-        this.code=code;
-        this.code=name;
-        this.courseDays = courseDays;
+    //Used to initialize a course to be added or updated in the database (no id is specified)
+    public Course(String code, String name, int instructorId, String description, String courseDay, String courseHours, int capacity) {
+        this.code = code;
+        this.name = name;
+        this.instructorId = instructorId;
+        this.description = description;
+        this.courseDay = courseDay;
         this.courseHours = courseHours;
         this.capacity = capacity;
-        this.description=description;
+    }
+
+    //Used to initialize a course to be added or updated in the database that includes only course code and name information
+    public Course(String code, String name) {
+        this.code = code;
+        this.name = name;
     }
 
     public int getId() {
@@ -84,12 +81,12 @@ public class Course implements Serializable {
         this.description = description;
     }
 
-    public String getCourseDays() {
-        return courseDays;
+    public String getCourseDay() {
+        return courseDay;
     }
 
-    public void setCourseDays(String courseDays) {
-        this.courseDays = courseDays;
+    public void setCourseDay(String courseDay) {
+        this.courseDay = courseDay;
     }
 
     public String getCourseHours() {
@@ -114,12 +111,9 @@ public class Course implements Serializable {
                 "\nName: " + name +
                 "\nInstructorId: " + instructorId +
                 "\nDescription: " + description +
+                "\nDay: " + courseDay +
+                "\nHours: " + courseHours +
                 "\nCapacity: " + capacity + "\n";
     }
-    public String toStringS(){
-        return "Course Days:  "+courseDays+
-                "\nCourse Hours: "+courseHours+
-                "\nCourse Description: "+description+
-                "\nCourse Capacity: " + capacity+ "\n";
-    }
+
 }
