@@ -40,10 +40,10 @@ public class AddInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DBHandler myDB=new DBHandler(AddInfo.this);
-                myDB.addCourseINFO(courseDay.getText().toString().trim(),
-                        courseHour.getText().toString().trim(),
-                        Integer.valueOf(courseCapacity.getText().toString().trim()),
-                        courseDescription.getText().toString().trim());
+//                myDB.addCourseINFO(courseDay.getText().toString().trim(),
+//                        courseHour.getText().toString().trim(),
+//                        Integer.valueOf(courseCapacity.getText().toString().trim()),
+//                        courseDescription.getText().toString().trim());
             }
 
         });

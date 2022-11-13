@@ -26,7 +26,7 @@ public class EditCourseInfo extends AppCompatActivity {
         setContentView(R.layout.activity_edit_course_info);
 
 
-        course = findViewById(R.id.textView25);
+        course = findViewById(R.id.textView24);
         courseDay = findViewById(R.id.editTextTextPersonName7); // title_input
         courseHour = findViewById(R.id.editTextTextPersonName9); //author_input
         courseCapacity= findViewById(R.id.editTextTextPersonName10); //page_input
@@ -38,10 +38,10 @@ public class EditCourseInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DBHandler myDB=new DBHandler(EditCourseInfo.this);
-                myDB.editCourseINFO(courseDay.getText().toString().trim(),
-                        courseHour.getText().toString().trim(),
-                        Integer.valueOf(courseCapacity.getText().toString().trim()),
-                        courseDescription.getText().toString().trim());
+//                myDB.editCourseINFO(courseDay.getText().toString().trim(),
+//                        courseHour.getText().toString().trim(),
+//                        Integer.valueOf(courseCapacity.getText().toString().trim()),
+//                        courseDescription.getText().toString().trim());
             }
 
         });
