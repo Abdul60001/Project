@@ -51,10 +51,10 @@ public class CreateAccount extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String usernameInput = usernameField.getText().toString().toLowerCase();
+                String usernameInput = usernameField.getText().toString().toLowerCase().trim();
                 String passwordInput = passwordField.getText().toString();
                 String confirmPasswordInput = confirmPasswordField.getText().toString();
-                String userRoleInput = userRoleField.getText().toString().toLowerCase();
+                String userRoleInput = userRoleField.getText().toString().toLowerCase().trim();
 
                 if(!isValidEmailAddress(usernameInput)) {
                     displayDialogWithMessage("Error: Invalid email address.");

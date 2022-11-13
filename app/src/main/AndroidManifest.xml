@@ -29,7 +29,7 @@
             android:name=".CreateAccount"
             android:exported="false" />
         <activity
-            android:name=".ModifyCourseInstructor"
+            android:name=".ModifyCoursesInstructor"
             android:exported="false" />
         <activity
             android:name=".CourseSettings"

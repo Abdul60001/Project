@@ -1,6 +1,5 @@
 package com.example.project;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,7 +51,7 @@ public class InstructorStarter extends AppCompatActivity {
 
         addEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                goToModifyCourseInstructor();}
+                goToModifyCoursesInstructor();}
         });
 
     }
@@ -80,8 +79,8 @@ public class InstructorStarter extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToModifyCourseInstructor() {
-        Intent intent = new Intent(this,ModifyCourseInstructor.class);
+    private void goToModifyCoursesInstructor() {
+        Intent intent = new Intent(this, ModifyCoursesInstructor.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }

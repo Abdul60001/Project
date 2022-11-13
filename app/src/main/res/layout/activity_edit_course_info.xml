@@ -8,9 +8,9 @@
 
     <TextView
         android:id="@+id/textView24"
-        android:layout_width="224dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="110dp"
+        android:layout_width="292dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:text="Course Information"
         android:textSize="32sp"
@@ -19,45 +19,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <EditText
-        android:id="@+id/editTextTextPersonName19"
+        android:id="@+id/editTextTextPersonName17"
         android:layout_width="292dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="Course Code"
+        android:hint="Course Description"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName20"
+        android:id="@+id/editTextTextPersonName10"
         android:layout_width="292dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="Course Name"
+        android:hint="Course Capacity"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName19" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName7"
-        android:layout_width="292dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:hint="Course Day"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName20" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName17" />
 
     <EditText
         android:id="@+id/editTextTextPersonName9"
@@ -73,45 +60,40 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName10"
+        android:id="@+id/editTextTextPersonName7"
         android:layout_width="292dp"
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="Course Capacity"
+        android:hint="Course Day"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName17"
-        android:layout_width="292dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="Course Description"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
 
     <Button
         android:id="@+id/button42"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_width="135dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="50dp"
         android:text="Update"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button43"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
 
     <Button
         android:id="@+id/button43"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back" />
+        android:layout_width="135dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="50dp"
+        android:text="Back"
+        app:layout_constraintEnd_toStartOf="@+id/button42"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
