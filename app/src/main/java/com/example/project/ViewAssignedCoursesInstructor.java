@@ -60,6 +60,10 @@ public class ViewAssignedCoursesInstructor extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 selectedCourse.setInstructorId(-1);
+                                selectedCourse.setDescription("");
+                                selectedCourse.setCourseDay("");
+                                selectedCourse.setCourseHours("");
+                                selectedCourse.setCapacity(0);
                                 dbHandler.updateCourseById(selectedCourse.getId(), selectedCourse);
                                 syncAssignedCourses();
                                 syncAssignedCoursesView();
