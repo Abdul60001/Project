@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Project"
         tools:targetApi="31" >
         <activity
-            android:name=".viewAssignedCoursesInsutructor"
+            android:name=".ViewAssignedCoursesInstructor"
             android:exported="false" />
         <activity
             android:name=".EditCourses"
@@ -29,7 +29,7 @@
             android:name=".CreateAccount"
             android:exported="false" />
         <activity
-            android:name=".ModifyCourseInstructor"
+            android:name=".ModifyCoursesInstructor"
             android:exported="false" />
         <activity
             android:name=".CourseSettings"
@@ -41,10 +41,10 @@
             android:name=".InstructorStarter"
             android:exported="false" />
         <activity
-            android:name=".addInfo"
+            android:name=".AddInfo"
             android:exported="true" />
         <activity
-            android:name=".ViewCourses"
+            android:name=".ViewCoursesAdmin"
             android:exported="false" />
         <activity
             android:name=".ManageInstructors"
@@ -71,7 +71,7 @@
             android:name=".AssignCourse"
             android:exported="false" />
         <activity
-            android:name=".editCourseInfo"
+            android:name=".EditCourseInfo"
             android:exported="false" />
         <activity
             android:name=".ViewCoursesInstructor"

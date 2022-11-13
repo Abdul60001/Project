@@ -4,13 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class addInfo extends AppCompatActivity {
+public class AddInfo extends AppCompatActivity {
     // ADD COURSE INFROMATION ( COURSE DAY , COURSE HOURS , COURSE CAPACITY , COURSE DESCRIPTION ).
 
     Button save, back;
@@ -40,11 +39,11 @@ public class addInfo extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBHandler myDB=new DBHandler(addInfo.this);
-                myDB.addCourseINFO(courseDay.getText().toString().trim(),
-                        courseHour.getText().toString().trim(),
-                        Integer.valueOf(courseCapacity.getText().toString().trim()),
-                        courseDescription.getText().toString().trim());
+                DBHandler myDB=new DBHandler(AddInfo.this);
+//                myDB.addCourseINFO(courseDay.getText().toString().trim(),
+//                        courseHour.getText().toString().trim(),
+//                        Integer.valueOf(courseCapacity.getText().toString().trim()),
+//                        courseDescription.getText().toString().trim());
             }
 
         });
@@ -60,6 +59,7 @@ public class addInfo extends AppCompatActivity {
     }
     private void goToInstructorStarter() {
         Intent intent = new Intent(this,InstructorStarter.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 }

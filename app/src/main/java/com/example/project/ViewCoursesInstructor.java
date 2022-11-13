@@ -48,18 +48,7 @@ public class ViewCoursesInstructor extends AppCompatActivity {
 
     private void goToInstructorStarter() {
         Intent intent = new Intent(this,InstructorStarter.class);
-        startActivity(intent);
-    }
-    private void goToEditCourse(Course selectedCourse) {
-        Intent intent = new Intent(this, EditCourses.class);
         intent.putExtra("current_user", currentUser);
-        intent.putExtra("selected_course", selectedCourse);
-        startActivity(intent);
-    }
-    private void goToAssignCourse(Course selectedCourse) {
-        Intent intent = new Intent(this, AssignCourse.class);
-        intent.putExtra("current_user", currentUser);
-        intent.putExtra("selected_course", selectedCourse);
         startActivity(intent);
     }
 
@@ -67,7 +56,7 @@ public class ViewCoursesInstructor extends AppCompatActivity {
         coursesList2.clear();
         Cursor cursor = dbHandler.getCourses();
         while (cursor.moveToNext()) {
-            coursesList2.add(new Course(Integer.valueOf(cursor.getInt(0)), cursor.getString(1), cursor.getString(2), Integer.valueOf(cursor.getString(3)), cursor.getString(4), Integer.valueOf(cursor.getString(5))));
+            coursesList2.add(new Course(Integer.valueOf(cursor.getInt(0)), cursor.getString(1), cursor.getString(2), Integer.valueOf(cursor.getString(3)), cursor.getString(4), cursor.getString(5), cursor.getString(6), Integer.valueOf(cursor.getString(7))));
         }
         cursor.close();
 

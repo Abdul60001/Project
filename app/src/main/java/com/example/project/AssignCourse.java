@@ -2,14 +2,15 @@ package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.ResourceBundle;
 
 public class AssignCourse extends AppCompatActivity {
 
@@ -22,12 +23,15 @@ public class AssignCourse extends AppCompatActivity {
     DBHandler dbHandler;
 
     User currentUser;
-    Course currentCourse;
+
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_course);
+
+        builder = new AlertDialog.Builder(this);
 
         assignCourse = findViewById(R.id.textView23);
         courseCode = findViewById(R.id.editTextTextPersonName11);
@@ -37,30 +41,30 @@ public class AssignCourse extends AppCompatActivity {
 
         dbHandler = new DBHandler(this);
 
-        currentCourse = (Course) getIntent().getSerializableExtra("selected_course");
         currentUser = (User) getIntent().getSerializableExtra("current_user");
 
-        if (currentCourse != null) {
-            assignCourse.setText(currentCourse.getCode());
-            courseCode.setText(currentCourse.getCode());
-            courseName.setText(currentCourse.getName());
-        }
         assign.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String courseCodeInput = courseCode.getText().toString();
                 String courseNameInput = courseName.getText().toString();
 
-                if(currentCourse!=null) {
-                    currentCourse.setCode(courseCodeInput);
-                    currentCourse.setName(courseNameInput);
+                Course courseSearch = getCourseByCodeAndName(courseCodeInput, courseNameInput);
 
-                    dbHandler.updateCourseById(currentCourse.getId(), currentCourse);
+                if(courseSearch!=null) {
+                    if(courseSearch.getInstructorId()==-1) {
+                        courseSearch.setInstructorId(currentUser.getId());
+                        dbHandler.updateCourseById(courseSearch.getId(), courseSearch);
+                        goToViewAssignedCoursesInstructor();
+                    }
+                    else {
+                        User courseSearchInstructor = getInstructorById(courseSearch.getInstructorId());
+                        displayDialogWithMessage("Course already assigned to " + courseSearchInstructor.getUsername());
+                    }
                 }
                 else {
-                    dbHandler.assignCourse(new Course(courseCodeInput, courseNameInput));
+                    displayDialogWithMessage("No course found.");
                 }
 
-                goToviewAssignedCoursesInstructor();
             }
         });
 
@@ -72,13 +76,45 @@ public class AssignCourse extends AppCompatActivity {
 
     }
 
-    private void goToviewAssignedCoursesInstructor() {
-        Intent intent = new Intent(this, viewAssignedCoursesInsutructor.class);
+    private void goToViewAssignedCoursesInstructor() {
+        Intent intent = new Intent(this, ViewAssignedCoursesInstructor.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
     private void goToInstructorStarter() {
         Intent intent = new Intent(this, InstructorStarter.class);
+        intent.putExtra("current_user", currentUser);
         startActivity(intent);
+    }
+
+    private void displayDialogWithMessage(String message) {
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {}
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private Course getCourseByCodeAndName(String code, String name) {
+        Cursor cursor = dbHandler.getCoursesByCodeAndName(code, name);
+        Course result = null;
+        if (cursor.moveToNext()) {
+            result = new Course(Integer.valueOf(cursor.getInt(0)), cursor.getString(1), cursor.getString(2), Integer.valueOf(cursor.getString(3)), cursor.getString(4), cursor.getString(5), cursor.getString(6), Integer.valueOf(cursor.getString(7)));
+        }
+        cursor.close();
+        return result;
+    }
+
+    private User getInstructorById(int id) {
+        Cursor cursor = dbHandler.getUsersById(id);
+        User result = null;
+        if (cursor.moveToNext()) {
+            result = new User(Integer.valueOf(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+        }
+        cursor.close();
+        return result;
     }
 }
 

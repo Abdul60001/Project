@@ -6,12 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.project.databinding.ActivityWelcomePage2Binding;
-
 
 public class InstructorStarter extends AppCompatActivity {
     Button viewCourse, assignCourse,viewAssignedCourses,addEdit, back;
     User currentUser;
+    DBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +23,14 @@ public class InstructorStarter extends AppCompatActivity {
         addEdit = findViewById(R.id.button36);
         back = findViewById(R.id.button35);
 
+        dbHandler = new DBHandler(this);
+
         currentUser = (User) getIntent().getSerializableExtra("current_user");
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToWelcomePage2();
+                goToWelcomePage();
             }
         });
 
@@ -42,30 +43,26 @@ public class InstructorStarter extends AppCompatActivity {
             public void onClick(View v) {
                 goToAssignCourse();}
         });
+
         viewAssignedCourses.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                goToviewAssignedCoursesInstructor();}
+                goToViewAssignedCoursesInstructor();}
         });
 
         addEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                goToModifyCourseInstructor();}
+                goToModifyCoursesInstructor();}
         });
 
     }
-    private void goToWelcomePage2() {
-        Intent intent = new Intent(this, ActivityWelcomePage2Binding.class);
+    private void goToWelcomePage() {
+        Intent intent = new Intent(this, WelcomePage.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
     private void goToViewCoursesInstructor() {
         Intent intent = new Intent(this, ViewCoursesInstructor.class);
-        intent.putExtra("current_user", currentUser);
-        startActivity(intent);
-    }
-    private void goToviewAssignedCoursesInstructor() {
-        Intent intent = new Intent(this, viewAssignedCoursesInsutructor.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
@@ -76,8 +73,14 @@ public class InstructorStarter extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToModifyCourseInstructor() {
-        Intent intent = new Intent(this,ModifyCourseInstructor.class);
+    private void goToViewAssignedCoursesInstructor() {
+        Intent intent = new Intent(this, ViewAssignedCoursesInstructor.class);
+        intent.putExtra("current_user", currentUser);
+        startActivity(intent);
+    }
+
+    private void goToModifyCoursesInstructor() {
+        Intent intent = new Intent(this, ModifyCoursesInstructor.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
