@@ -52,7 +52,10 @@ public class EditCourseInfo extends AppCompatActivity {
         courseDay.setText(currentCourse.getCourseDay());
         courseHours.setText(currentCourse.getCourseHours());
         courseDescription.setText(currentCourse.getDescription());
-        courseCapacity.setText(String.valueOf(currentCourse.getCapacity()));
+
+        if(currentCourse.getCapacity()!=0) {
+            courseCapacity.setText(String.valueOf(currentCourse.getCapacity()));
+        }
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
