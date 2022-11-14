@@ -1,5 +1,7 @@
 package com.example.project;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,16 +21,20 @@ public class ViewCoursesInstructor extends AppCompatActivity {
     Button back;
     ListView coursesListView;
 
-    ArrayList<Course> coursesList2;
+    ArrayList<Course> coursesList;
     DBHandler dbHandler;
     String[] courseCodeStringList;
 
     User currentUser;
 
+    AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_course_insturctor);
+
+        builder = new AlertDialog.Builder(this);
 
         back = findViewById(R.id.button32);
         coursesListView = findViewById(R.id.ListView3);
@@ -36,7 +42,7 @@ public class ViewCoursesInstructor extends AppCompatActivity {
         currentUser = (User) getIntent().getSerializableExtra("current_user");
 
         dbHandler = new DBHandler(this);
-        coursesList2 = new ArrayList<>();
+        coursesList = new ArrayList<>();
         syncCourseList();
         syncCoursesListView();
 
@@ -44,6 +50,31 @@ public class ViewCoursesInstructor extends AppCompatActivity {
             public void onClick(View v) {goToInstructorStarter();}
         });
 
+        coursesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Course selectedCourse = coursesList.get(position);
+                User selectedCourseInstructor = getInstructorById(selectedCourse.getInstructorId());
+                displayDialogWithMessage("Course Code: "+selectedCourse.getCode()+"\n"+
+                                "Course Name: "+selectedCourse.getName()+"\n"+
+                                "Instructor: "+selectedCourseInstructor.getUsername()+"\n"+
+                                "Day: "+selectedCourse.getCourseDay()+"\n"+
+                                "Hours: "+selectedCourse.getCourseHours()+"\n"+
+                                "Description: "+selectedCourse.getDescription()+"\n"+
+                                "Capacity: "+selectedCourse.getCapacity()
+                        );
+            }
+        });
+
+    }
+
+    private void displayDialogWithMessage(String message) {
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {}
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private void goToInstructorStarter() {
@@ -53,10 +84,10 @@ public class ViewCoursesInstructor extends AppCompatActivity {
     }
 
     private void syncCourseList() {
-        coursesList2.clear();
+        coursesList.clear();
         Cursor cursor = dbHandler.getCourses();
         while (cursor.moveToNext()) {
-            coursesList2.add(new Course(Integer.valueOf(cursor.getInt(0)), cursor.getString(1), cursor.getString(2), Integer.valueOf(cursor.getString(3)), cursor.getString(4), cursor.getString(5), cursor.getString(6), Integer.valueOf(cursor.getString(7))));
+            coursesList.add(new Course(Integer.valueOf(cursor.getInt(0)), cursor.getString(1), cursor.getString(2), Integer.valueOf(cursor.getString(3)), cursor.getString(4), cursor.getString(5), cursor.getString(6), Integer.valueOf(cursor.getString(7))));
         }
         cursor.close();
 
@@ -64,9 +95,9 @@ public class ViewCoursesInstructor extends AppCompatActivity {
     }
 
     private void getCourseCodesFromCourseList() {
-        String[] result = new String[coursesList2.size()];
+        String[] result = new String[coursesList.size()];
         int counter=0;
-        for(Course c: coursesList2) {
+        for(Course c: coursesList) {
             result[counter] = c.getCode();
             counter++;
         }
@@ -76,6 +107,16 @@ public class ViewCoursesInstructor extends AppCompatActivity {
     private void syncCoursesListView() {
         ArrayAdapter<String> usernameListAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item, R.id.textView10, courseCodeStringList);
         coursesListView.setAdapter(usernameListAdapter);
+    }
+
+    private User getInstructorById(int id) {
+        Cursor cursor = dbHandler.getUsersById(id);
+        User result = null;
+        if (cursor.moveToNext()) {
+            result = new User(Integer.valueOf(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+        }
+        cursor.close();
+        return result;
     }
 
 }
