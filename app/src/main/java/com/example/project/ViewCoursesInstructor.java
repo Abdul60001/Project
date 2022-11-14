@@ -54,14 +54,28 @@ public class ViewCoursesInstructor extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Course selectedCourse = coursesList.get(position);
                 User selectedCourseInstructor = getInstructorById(selectedCourse.getInstructorId());
-                displayDialogWithMessage("Course Code: "+selectedCourse.getCode()+"\n"+
-                                "Course Name: "+selectedCourse.getName()+"\n"+
-                                "Instructor: "+selectedCourseInstructor.getUsername()+"\n"+
-                                "Day: "+selectedCourse.getCourseDay()+"\n"+
-                                "Hours: "+selectedCourse.getCourseHours()+"\n"+
-                                "Description: "+selectedCourse.getDescription()+"\n"+
-                                "Capacity: "+selectedCourse.getCapacity()
-                        );
+                String display = "";
+
+                if(selectedCourseInstructor!=null) {
+                    display = "Course Code: "+selectedCourse.getCode()+"\n"+
+                            "Course Name: "+selectedCourse.getName()+"\n"+
+                            "Instructor: "+selectedCourseInstructor.getUsername()+"\n"+
+                            "Day: "+selectedCourse.getCourseDay()+"\n"+
+                            "Hours: "+selectedCourse.getCourseHours()+"\n"+
+                            "Description: "+selectedCourse.getDescription()+"\n"+
+                            "Capacity: "+selectedCourse.getCapacity();
+                }
+                else {
+                    display = "Course Code: "+selectedCourse.getCode()+"\n"+
+                            "Course Name: "+selectedCourse.getName()+"\n"+
+                            "Instructor: "+""+"\n"+
+                            "Day: "+selectedCourse.getCourseDay()+"\n"+
+                            "Hours: "+selectedCourse.getCourseHours()+"\n"+
+                            "Description: "+selectedCourse.getDescription()+"\n"+
+                            "Capacity: "+selectedCourse.getCapacity();
+                }
+
+                displayDialogWithMessage(display);
             }
         });
 
