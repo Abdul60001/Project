@@ -58,7 +58,7 @@ public class student_starter extends AppCompatActivity {
         startActivity(intent);
     }
     private void goToviewCoursesStudent() {
-        Intent intent = new Intent(this, Course.class);
+        Intent intent = new Intent(this, view_course_student.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
