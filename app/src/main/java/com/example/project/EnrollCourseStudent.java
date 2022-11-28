@@ -24,6 +24,7 @@ public class EnrollCourseStudent extends AppCompatActivity {
     ListView coursesListView;
     DBHandler dbHandler;
     String[] courseCodeStringList;
+    ArrayList<Course> enrolledCourses;
 
     AlertDialog.Builder builder;
 
@@ -39,14 +40,17 @@ public class EnrollCourseStudent extends AppCompatActivity {
         currentUser = (User) getIntent().getSerializableExtra("current_user");
         coursesList = (ArrayList<Course>) getIntent().getSerializableExtra("course_search");
 
+        enrolledCourses = new ArrayList<>();
+
         builder = new AlertDialog.Builder(this);
+
+        getCourseCodesFromCourseList();
+        syncCoursesListView();
+        syncEnrolledCourses();
 
         back.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){goToSearchCourse();}
         } );
-
-        getCourseCodesFromCourseList();
-        syncCoursesListView();
 
         coursesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -80,6 +84,7 @@ public class EnrollCourseStudent extends AppCompatActivity {
     }
 
     private void displayDialogWithMessage(String message, Course course) {
+        builder = new AlertDialog.Builder(this);
         builder.setMessage(message)
                 .setCancelable(false)
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -87,12 +92,55 @@ public class EnrollCourseStudent extends AppCompatActivity {
                 })
                 .setPositiveButton("Enrol", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
-                        dbHandler.addEnrolment(currentUser.getId(), course.getId());
-                        goToViewEnrolledCourses();
+                        if(checkTimeConflict(course)) {
+                            displayDialogWithMessage("This course conflicts with one of your other courses.");
+                        }
+                        else {
+                            dbHandler.addEnrolment(currentUser.getId(), course.getId());
+                            goToViewEnrolledCourses();
+                        }
                     }
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void displayDialogWithMessage(String message) {
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {}
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void syncEnrolledCourses(){
+        enrolledCourses.clear();
+        Cursor cursor = dbHandler.getEnrolledCoursesByUserId(currentUser.getId());
+        ArrayList<Integer> courseIds = new ArrayList<Integer>();
+        while(cursor.moveToNext()){
+            courseIds.add(cursor.getInt(1));
+        }
+
+        for (int i : courseIds){
+            Cursor c = dbHandler.getCoursesByCourseId(i);
+            if (c.moveToNext()) {
+                enrolledCourses.add(new Course(Integer.valueOf(c.getInt(0)), c.getString(1), c.getString(2), Integer.valueOf(c.getString(3)), c.getString(4), c.getString(5), c.getString(6), Integer.valueOf(c.getString(7))));
+            }
+            c.close();
+        }
+        cursor.close();
+    }
+
+    private boolean checkTimeConflict(Course newCourse) {
+        for(Course c: enrolledCourses) {
+            if(c.getCourseDay().equalsIgnoreCase(newCourse.getCourseDay()) && c.getCourseHours().equals(newCourse.getCourseHours())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void goToSearchCourse(){

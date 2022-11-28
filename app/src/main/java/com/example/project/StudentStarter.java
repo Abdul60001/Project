@@ -37,17 +37,18 @@ public class StudentStarter extends AppCompatActivity {
 
         viewCoursesStudent.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {goToviewCoursesStudent();}
+            public void onClick(View v) {
+                goToViewCoursesStudent();}
         });
 
         searchEnrolleCourseStudent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                goToenrollCourseStudent();}
+                goToEnrollCourseStudent();}
         });
 
         viewEnrolledCourse.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                goToviewEnrolledCourse();}
+                goToViewEnrolledCourse();}
         });
 
     }
@@ -57,20 +58,20 @@ public class StudentStarter extends AppCompatActivity {
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
-    private void goToviewCoursesStudent() {
+    private void goToViewCoursesStudent() {
         Intent intent = new Intent(this, ViewCourseStudent.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
 
-    private void goToenrollCourseStudent() {
+    private void goToEnrollCourseStudent() {
         Intent intent = new Intent(this, StudentSearchCourse.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
-    private void goToviewEnrolledCourse() {
+    private void goToViewEnrolledCourse() {
         Intent intent = new Intent(this, ViewEnrolledCoursesStudent.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);

@@ -68,7 +68,7 @@ public class ViewCoursesInstructor extends AppCompatActivity {
                 else {
                     display = "Course Code: "+selectedCourse.getCode()+"\n"+
                             "Course Name: "+selectedCourse.getName()+"\n"+
-                            "Instructor: "+""+"\n"+
+                            "Instructor: No Instructor Found\n"+
                             "Day: "+selectedCourse.getCourseDay()+"\n"+
                             "Hours: "+selectedCourse.getCourseHours()+"\n"+
                             "Description: "+selectedCourse.getDescription()+"\n"+
