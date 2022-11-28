@@ -36,7 +36,7 @@ public class viewenrolledCoursesStudent extends AppCompatActivity {
 
         builder = new AlertDialog.Builder(this);
 
-        back = findViewById(R.id.button45);
+        back = findViewById(R.id.button50);
         enrolledCoursesView = findViewById(R.id.listview20);
 
 
@@ -50,6 +50,9 @@ public class viewenrolledCoursesStudent extends AppCompatActivity {
                 goToStudentStarter();
             }
         });
+
+        syncEnrolledCourses();
+        syncCoursesListView();
     }
 
     private void goToStudentStarter() {
@@ -58,6 +61,37 @@ public class viewenrolledCoursesStudent extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void syncEnrolledCourses(){
+        Cursor cursor = dbHandler.getEnrolledCoursesByUserId(currentUser.getId());
+        ArrayList<Integer> courseIds = new ArrayList<Integer>();
+        while(cursor.moveToNext()){
+            int id = Integer.valueOf(cursor.getInt(1));
+            courseIds.add(id);
+        }
 
+        for (int i : courseIds){
+            Cursor c = dbHandler.getCoursesByCourseId(i);
+            enrolledCourses.add(new Course(Integer.valueOf(c.getInt(0)), c.getString(1), c.getString(2), Integer.valueOf(c.getString(3)), c.getString(4), c.getString(5), c.getString(6), Integer.valueOf(c.getString(7))) );
+            c.close();
+        }
+        cursor.close();
+
+        getCourseCodesFromCourseList();
+    }
+
+    private void getCourseCodesFromCourseList() {
+        String[] result = new String[enrolledCourses.size()];
+        int counter=0;
+        for(Course c: enrolledCourses) {
+            result[counter] = c.getCode();
+            counter++;
+        }
+        enrolledCourseCodeStringList = result;
+    }
+
+    private void syncCoursesListView(){
+        ArrayAdapter<String> usernameListAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item, R.id.textView10, enrolledCourseCodeStringList);
+        enrolledCoursesView.setAdapter(usernameListAdapter);
+    }
 
 }

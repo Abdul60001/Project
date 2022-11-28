@@ -1,6 +1,7 @@
 package com.example.project;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Course implements Serializable {
     private int id;

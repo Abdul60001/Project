@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.Nullable;
+import android.util.Log;
 
 public class DBHandler extends SQLiteOpenHelper {
     private Context context;
@@ -31,6 +32,11 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COURSES_DAY = "day";
     private static final String COURSES_HOURS = "hours";
     private static final String COURSES_CAPACITY = "capacity";
+
+    //enrolment table variables
+    private static final String ENROLMENT_TABLE_NAME = "Enrolments";
+    private static final String STUDENT_ID = "student_id";
+    private static final String COURSE_ID = "course_id";
 
     public DBHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -58,14 +64,27 @@ public class DBHandler extends SQLiteOpenHelper {
                 "FOREIGN KEY (" + COURSES_INSTRUCTOR_ID + ") REFERENCES " + USERS_TABLE_NAME + "(" + USERS_ID + ")" +
                 ");";
 
+        String create_enrolment_table = "CREATE TABLE " + ENROLMENT_TABLE_NAME + " (" +
+                STUDENT_ID + " INTEGER, " +
+                COURSE_ID + " INTEGER, " +
+                "FOREIGN KEY (" + STUDENT_ID + ") REFERENCES " + USERS_TABLE_NAME + "(" + USERS_ID + ")," +
+                "FOREIGN KEY (" + COURSE_ID + ") REFERENCES " + COURSES_TABLE_NAME + "(" + COURSES_ID + ")" +
+                ");";
+
+
         db.execSQL(create_users_table);
         db.execSQL(create_courses_table);
+        db.execSQL(create_enrolment_table);
+        Log.d("CREATE", create_courses_table);
+        Log.d("CREATE", create_enrolment_table);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + USERS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + COURSES_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + ENROLMENT_TABLE_NAME);
         onCreate(db);
     }
 
@@ -86,6 +105,11 @@ public class DBHandler extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
     }
 
+    public Cursor getCoursesByCourseId(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_ID + "=?", new String[]{String.valueOf(id)});
+    }
+
     public Cursor getCoursesByInstructorId(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_INSTRUCTOR_ID + "=?", new String[]{String.valueOf(id)});
@@ -103,6 +127,38 @@ public class DBHandler extends SQLiteOpenHelper {
         else {
             return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_CODE + " LIKE? AND " + COURSES_NAME + " LIKE?", new String[]{code, name});
         }
+    }
+
+    public Cursor getCoursesByCodeAndNameAndDay(String code, String name, String day){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        if(code.equals("") && name.equals("") && !day.equals("")){
+            return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_DAY + " LIKE?", new String[]{day});
+        }
+        else if(code.equals("") && !name.equals("") && day.equals("")){
+            return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_NAME + " LIKE?", new String[]{name});
+        }
+        else if(!code.equals("") && name.equals("") && day.equals("")){
+            return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_CODE + " LIKE?", new String[]{code});
+        }
+        else if (code.equals("") && !name.equals("") && !day.equals("")){
+            return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_NAME + " LIKE? AND " + COURSES_DAY + " LIKE?", new String[]{name, day});
+        }
+        else if (!code.equals("") && name.equals("") && !day.equals("")){
+            return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_CODE + " LIKE? AND " + COURSES_DAY + " LIKE?", new String[]{code, day});
+        }
+        else if (!code.equals("") && !name.equals("") && day.equals("")){
+            return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_CODE + " LIKE? AND " + COURSES_NAME + " LIKE?", new String[]{code, name});
+        }
+        else {
+            return db.rawQuery("SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COURSES_CODE + " LIKE? AND " + COURSES_NAME + " LIKE? AND " + COURSES_DAY + " LIKE?", new String[]{code, name, day});
+        }
+    }
+
+    public Cursor getEnrolledCoursesByUserId(int user_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        //return db.rawQuery("SELECT * FROM " + ENROLMENT_TABLE_NAME + " WHERE " + STUDENT_ID + " LIKE? ", new String[]{String.valueOf(user_id)});
+        return db.rawQuery("SELECT * FROM " + ENROLMENT_TABLE_NAME, new String[]{});
     }
 
     public void addUser(User user) {
@@ -133,6 +189,16 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void addEnrolment(int user_id, int course_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(STUDENT_ID, user_id);
+        values.put(COURSE_ID, course_id);
+
+        db.insert(ENROLMENT_TABLE_NAME, null, values);
+    }
+
     public void deleteUserById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(USERS_TABLE_NAME, USERS_ID + "=" + id, null);
@@ -141,6 +207,11 @@ public class DBHandler extends SQLiteOpenHelper {
     public void deleteCourseById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(COURSES_TABLE_NAME, COURSES_ID + "=" + id, null);
+    }
+
+    public void deleteEnrolment(int user_id, int course_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(ENROLMENT_TABLE_NAME, STUDENT_ID + "=? AND " + COURSE_ID + "=?", new String[]{String.valueOf(user_id), String.valueOf(course_id)});
     }
 
     public void updateCourseById(int id, Course newCourse) {
@@ -158,4 +229,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.update(COURSES_TABLE_NAME, values, COURSES_ID + "=" + id, null);
     }
+
+
 }

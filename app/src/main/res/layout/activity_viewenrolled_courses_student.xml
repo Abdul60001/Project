@@ -24,7 +24,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Select a course to un-assign yourself"
+        android:text="Select a course to un-enroll"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -37,7 +38,7 @@ public class view_course_student extends AppCompatActivity {
 
         builder = new AlertDialog.Builder(this);
 
-        back = findViewById(R.id.button32);
+        back = findViewById(R.id.button49);
         coursesListView = findViewById(R.id.ListView3);
 
         currentUser = (User) getIntent().getSerializableExtra("current_user");
@@ -51,7 +52,47 @@ public class view_course_student extends AppCompatActivity {
             public void onClick(View v) {goToStudentStarter();}
         });
 
+        coursesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Course selectedCourse = coursesList.get(position);
+                User selectedCourseInstructor = getInstructorById(selectedCourse.getInstructorId());
+                String display = "";
+
+                if(selectedCourseInstructor!=null) {
+                    display = "Course Code: "+selectedCourse.getCode()+"\n"+
+                            "Course Name: "+selectedCourse.getName()+"\n"+
+                            "Instructor: "+selectedCourseInstructor.getUsername()+"\n"+
+                            "Day: "+selectedCourse.getCourseDay()+"\n"+
+                            "Hours: "+selectedCourse.getCourseHours()+"\n"+
+                            "Description: "+selectedCourse.getDescription()+"\n"+
+                            "Capacity: "+selectedCourse.getCapacity();
+                }
+                else {
+                    display = "Course Code: "+selectedCourse.getCode()+"\n"+
+                            "Course Name: "+selectedCourse.getName()+"\n"+
+                            "Instructor: "+""+"\n"+
+                            "Day: "+selectedCourse.getCourseDay()+"\n"+
+                            "Hours: "+selectedCourse.getCourseHours()+"\n"+
+                            "Description: "+selectedCourse.getDescription()+"\n"+
+                            "Capacity: "+selectedCourse.getCapacity();
+                }
+
+                displayDialogWithMessage(display);
+            }
+        });
     }
+
+    private void displayDialogWithMessage(String message) {
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {}
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+
 
     private void goToStudentStarter() {
         Intent intent = new Intent(this,student_starter.class);
@@ -80,6 +121,16 @@ public class view_course_student extends AppCompatActivity {
     private void syncCoursesListView() {
         ArrayAdapter<String> usernameListAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item, R.id.textView10, courseCodeStringList);
         coursesListView.setAdapter(usernameListAdapter);
+    }
+
+    private User getInstructorById(int id) {
+        Cursor cursor = dbHandler.getUsersById(id);
+        User result = null;
+        if (cursor.moveToNext()) {
+            result = new User(Integer.valueOf(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+        }
+        cursor.close();
+        return result;
     }
 
 
