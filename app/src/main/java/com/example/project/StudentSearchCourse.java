@@ -9,12 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class studentSearchCourse extends AppCompatActivity {
+public class StudentSearchCourse extends AppCompatActivity {
     /** Search and Enroll Course */ 
     Button back, search;
     EditText courseCode, courseName,courseDay;
@@ -42,7 +40,8 @@ public class studentSearchCourse extends AppCompatActivity {
         currentUser = (User) getIntent().getSerializableExtra("current_user");
 
         back.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {goTostudent_starter();}
+            public void onClick(View v) {
+                goToStudentStarter();}
         });
         search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -50,18 +49,18 @@ public class studentSearchCourse extends AppCompatActivity {
                 String name = courseName.getText().toString();
                 String day = courseDay.getText().toString();
                 ArrayList<Course> courseSearch = getCoursesByCodeAndNameAndDay(code, name, day);
-                goTocourse(courseSearch);
+                goToCourse(courseSearch);
             }
         });
     }
 
-    private void goTostudent_starter() {
-        Intent intent = new Intent(this, student_starter.class);
+    private void goToStudentStarter() {
+        Intent intent = new Intent(this, StudentStarter.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
-    private void goTocourse(ArrayList<Course> courseSearch) {
-        Intent intent = new Intent(this, enrollCourseStudent.class);
+    private void goToCourse(ArrayList<Course> courseSearch) {
+        Intent intent = new Intent(this, EnrollCourseStudent.class);
         intent.putExtra("current_user", currentUser);
         intent.putExtra("course_search", courseSearch);
         startActivity(intent);
@@ -69,11 +68,9 @@ public class studentSearchCourse extends AppCompatActivity {
 
     private ArrayList<Course> getCoursesByCodeAndNameAndDay(String code, String name, String day) {
         Cursor cursor = dbHandler.getCoursesByCodeAndNameAndDay(code, name, day);
-        Course result = null;
         ArrayList<Course> courseList = new ArrayList<Course>();
         while (cursor.moveToNext()) {
-            result = new Course(Integer.valueOf(cursor.getInt(0)), cursor.getString(1), cursor.getString(2), Integer.valueOf(cursor.getString(3)), cursor.getString(4), cursor.getString(5), cursor.getString(6), Integer.valueOf(cursor.getString(7)));
-            courseList.add(result);
+            courseList.add(new Course(Integer.valueOf(cursor.getInt(0)), cursor.getString(1), cursor.getString(2), Integer.valueOf(cursor.getString(3)), cursor.getString(4), cursor.getString(5), cursor.getString(6), Integer.valueOf(cursor.getString(7))));
         }
         cursor.close();
         return courseList;

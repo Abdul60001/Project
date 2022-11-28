@@ -15,7 +15,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class viewenrolledCoursesStudent extends AppCompatActivity {
+public class ViewEnrolledCoursesStudent extends AppCompatActivity {
     /**Class to view enrolled Courses by student */
 
     Button back;
@@ -44,6 +44,9 @@ public class viewenrolledCoursesStudent extends AppCompatActivity {
         dbHandler = new DBHandler(this);
         enrolledCourses = new ArrayList<>();
 
+        syncEnrolledCourses();
+        syncCoursesListView();
+
 
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -51,27 +54,48 @@ public class viewenrolledCoursesStudent extends AppCompatActivity {
             }
         });
 
-        syncEnrolledCourses();
-        syncCoursesListView();
+        enrolledCoursesView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Course selectedCourse = enrolledCourses.get(position);
+                builder.setMessage("Un-enroll yourself from " + selectedCourse.getName() + "?")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dbHandler.deleteEnrolment(currentUser.getId(), selectedCourse.getId());
+                                syncEnrolledCourses();
+                                syncCoursesListView();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {}
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+
     }
 
     private void goToStudentStarter() {
-        Intent intent = new Intent(this, student_starter.class);
+        Intent intent = new Intent(this, StudentStarter.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
     private void syncEnrolledCourses(){
+        enrolledCourses.clear();
         Cursor cursor = dbHandler.getEnrolledCoursesByUserId(currentUser.getId());
         ArrayList<Integer> courseIds = new ArrayList<Integer>();
         while(cursor.moveToNext()){
-            int id = Integer.valueOf(cursor.getInt(1));
-            courseIds.add(id);
+            courseIds.add(cursor.getInt(1));
         }
 
         for (int i : courseIds){
             Cursor c = dbHandler.getCoursesByCourseId(i);
-            enrolledCourses.add(new Course(Integer.valueOf(c.getInt(0)), c.getString(1), c.getString(2), Integer.valueOf(c.getString(3)), c.getString(4), c.getString(5), c.getString(6), Integer.valueOf(c.getString(7))) );
+            if (c.moveToNext()) {
+                enrolledCourses.add(new Course(Integer.valueOf(c.getInt(0)), c.getString(1), c.getString(2), Integer.valueOf(c.getString(3)), c.getString(4), c.getString(5), c.getString(6), Integer.valueOf(c.getString(7))));
+            }
             c.close();
         }
         cursor.close();

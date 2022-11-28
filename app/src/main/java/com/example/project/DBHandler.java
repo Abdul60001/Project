@@ -157,8 +157,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public Cursor getEnrolledCoursesByUserId(int user_id){
         SQLiteDatabase db = this.getReadableDatabase();
-        //return db.rawQuery("SELECT * FROM " + ENROLMENT_TABLE_NAME + " WHERE " + STUDENT_ID + " LIKE? ", new String[]{String.valueOf(user_id)});
-        return db.rawQuery("SELECT * FROM " + ENROLMENT_TABLE_NAME, new String[]{});
+        return db.rawQuery("SELECT * FROM " + ENROLMENT_TABLE_NAME + " WHERE " + STUDENT_ID + " =? ", new String[]{String.valueOf(user_id)});
     }
 
     public void addUser(User user) {

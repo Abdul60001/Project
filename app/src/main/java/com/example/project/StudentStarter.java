@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class student_starter extends AppCompatActivity {
+public class StudentStarter extends AppCompatActivity {
     /** Student Starter class */
 
     Button viewCoursesStudent, searchEnrolleCourseStudent,viewEnrolledCourse, back;
@@ -37,17 +37,18 @@ public class student_starter extends AppCompatActivity {
 
         viewCoursesStudent.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {goToviewCoursesStudent();}
+            public void onClick(View v) {
+                goToViewCoursesStudent();}
         });
 
         searchEnrolleCourseStudent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                goToenrollCourseStudent();}
+                goToEnrollCourseStudent();}
         });
 
         viewEnrolledCourse.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                goToviewEnrolledCourse();}
+                goToViewEnrolledCourse();}
         });
 
     }
@@ -57,21 +58,21 @@ public class student_starter extends AppCompatActivity {
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
-    private void goToviewCoursesStudent() {
-        Intent intent = new Intent(this, view_course_student.class);
+    private void goToViewCoursesStudent() {
+        Intent intent = new Intent(this, ViewCourseStudent.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
 
-    private void goToenrollCourseStudent() {
-        Intent intent = new Intent(this, studentSearchCourse.class);
+    private void goToEnrollCourseStudent() {
+        Intent intent = new Intent(this, StudentSearchCourse.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
-    private void goToviewEnrolledCourse() {
-        Intent intent = new Intent(this, viewenrolledCoursesStudent.class);
+    private void goToViewEnrolledCourse() {
+        Intent intent = new Intent(this, ViewEnrolledCoursesStudent.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }

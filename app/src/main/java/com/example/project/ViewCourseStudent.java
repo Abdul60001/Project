@@ -9,14 +9,13 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class view_course_student extends AppCompatActivity {
+public class ViewCourseStudent extends AppCompatActivity {
     //View all available courses to Student
 
     Button back;
@@ -95,7 +94,7 @@ public class view_course_student extends AppCompatActivity {
 
 
     private void goToStudentStarter() {
-        Intent intent = new Intent(this,student_starter.class);
+        Intent intent = new Intent(this, StudentStarter.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
