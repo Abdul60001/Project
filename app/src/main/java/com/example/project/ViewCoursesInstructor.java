@@ -75,15 +75,20 @@ public class ViewCoursesInstructor extends AppCompatActivity {
                             "Capacity: "+selectedCourse.getCapacity();
                 }
 
-                displayDialogWithMessage(display);
+                displayDialogWithMessage(display, selectedCourse);
             }
         });
 
     }
 
-    private void displayDialogWithMessage(String message) {
+    private void displayDialogWithMessage(String message, Course course) {
         builder.setMessage(message)
                 .setCancelable(false)
+                .setNeutralButton("View Enrolled Students", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        goToViewEnrolledStudents(course);
+                    }
+                })
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {}
                 });
@@ -94,6 +99,13 @@ public class ViewCoursesInstructor extends AppCompatActivity {
     private void goToInstructorStarter() {
         Intent intent = new Intent(this,InstructorStarter.class);
         intent.putExtra("current_user", currentUser);
+        startActivity(intent);
+    }
+
+    private void goToViewEnrolledStudents(Course course) {
+        Intent intent = new Intent(this,ViewEnrolledStudents.class);
+        intent.putExtra("current_user", currentUser);
+        intent.putExtra("selected_course", course);
         startActivity(intent);
     }
 
