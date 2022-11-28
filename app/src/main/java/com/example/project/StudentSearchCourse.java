@@ -9,12 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class studentSearchCourse extends AppCompatActivity {
+public class StudentSearchCourse extends AppCompatActivity {
     /** Search and Enroll Course */ 
     Button back, search;
     EditText courseCode, courseName,courseDay;
@@ -56,12 +54,12 @@ public class studentSearchCourse extends AppCompatActivity {
     }
 
     private void goTostudent_starter() {
-        Intent intent = new Intent(this, student_starter.class);
+        Intent intent = new Intent(this, StudentStarter.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
     private void goTocourse(ArrayList<Course> courseSearch) {
-        Intent intent = new Intent(this, enrollCourseStudent.class);
+        Intent intent = new Intent(this, EnrollCourseStudent.class);
         intent.putExtra("current_user", currentUser);
         intent.putExtra("course_search", courseSearch);
         startActivity(intent);

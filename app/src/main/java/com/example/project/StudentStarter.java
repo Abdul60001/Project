@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class student_starter extends AppCompatActivity {
+public class StudentStarter extends AppCompatActivity {
     /** Student Starter class */
 
     Button viewCoursesStudent, searchEnrolleCourseStudent,viewEnrolledCourse, back;
@@ -58,20 +58,20 @@ public class student_starter extends AppCompatActivity {
         startActivity(intent);
     }
     private void goToviewCoursesStudent() {
-        Intent intent = new Intent(this, view_course_student.class);
+        Intent intent = new Intent(this, ViewCourseStudent.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
 
     private void goToenrollCourseStudent() {
-        Intent intent = new Intent(this, studentSearchCourse.class);
+        Intent intent = new Intent(this, StudentSearchCourse.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
     private void goToviewEnrolledCourse() {
-        Intent intent = new Intent(this, viewenrolledCoursesStudent.class);
+        Intent intent = new Intent(this, ViewEnrolledCoursesStudent.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }

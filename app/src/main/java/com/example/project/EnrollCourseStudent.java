@@ -15,10 +15,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import android.util.Log;
 
-
-public class enrollCourseStudent extends AppCompatActivity {
+public class EnrollCourseStudent extends AppCompatActivity {
     /** Enroll class by student */
     Button back;
     User currentUser;
@@ -98,13 +96,13 @@ public class enrollCourseStudent extends AppCompatActivity {
     }
 
     private void goToSearchCourse(){
-        Intent intent = new Intent(this, studentSearchCourse.class);
+        Intent intent = new Intent(this, StudentSearchCourse.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
 
     private void goToViewEnrolledCourses(){
-        Intent intent = new Intent(this, viewenrolledCoursesStudent.class);
+        Intent intent = new Intent(this, ViewEnrolledCoursesStudent.class);
         intent.putExtra("current_user", currentUser);
         startActivity(intent);
     }
