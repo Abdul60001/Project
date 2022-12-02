@@ -35,6 +35,8 @@ public class ViewEnrolledStudents extends AppCompatActivity {
         currentUser = (User) getIntent().getSerializableExtra("current_user");
         selectedCourse = (Course) getIntent().getSerializableExtra("selected_course");
 
+        studentsList = new ArrayList<>();
+
         syncStudents();
         syncCoursesListView();
 
