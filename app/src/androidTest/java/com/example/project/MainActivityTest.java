@@ -77,12 +77,14 @@ public class MainActivityTest {
 
     @Test
     public void viewUsers() {
-        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("admin"));
-        onView(withId(R.id.editTextTextPassword)).perform(typeText("admin123"));
+        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("student1@gmail.com"));
+        onView(withId(R.id.editTextTextPassword)).perform(typeText("Student1!!"));
         closeSoftKeyboard();
         onView(withId(R.id.button2)).perform(click());
         onView(withId(R.id.button3)).perform(click());
-        onView(withId(R.id.button4)).perform(click());
+        onView(withId(R.id.button39)).perform(click());
+        onView(withId(R.id.editTextTextPersonName19)).perform(typeText("CSI2110"));
+        onView(withId(R.id.button21)).perform(click());
 
     }
 
